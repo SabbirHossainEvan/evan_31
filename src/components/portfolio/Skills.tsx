@@ -37,6 +37,16 @@ const skillCategories: SkillCategory[] = [
     ],
   },
   {
+    title: 'Programming Languages',
+    icon: '💻',
+    skills: [
+      { name: 'C', level: 80, color: 'from-[#C93CFF] to-[#9333EA]' },
+      { name: 'C++', level: 78, color: 'from-[#9333EA] to-[#F0C7FF]' },
+      { name: 'Java', level: 75, color: 'from-[#F0C7FF] to-[#D946EF]' },
+      { name: 'Python', level: 72, color: 'from-[#D946EF] to-[#C93CFF]' },
+    ],
+  },
+  {
     title: 'Backend & Tools',
     icon: '⚙️',
     skills: [
@@ -49,6 +59,11 @@ const skillCategories: SkillCategory[] = [
 ]
 
 const techLogos = [
+  { name: 'C', svg: 'C' },
+  { name: 'C++', svg: 'C++' },
+  { name: 'Java', svg: '☕' },
+  { name: 'Python', svg: '🐍' },
+  { name: 'Flutter', svg: '💙' },
   { name: 'React Native', svg: '⚛️' },
   { name: 'React', svg: '⚛️' },
   { name: 'Next.js', svg: '▲' },
@@ -92,7 +107,7 @@ export default function Skills() {
         </motion.div>
 
         {/* Skill Categories */}
-        <div className="grid md:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-12 md:mb-16">
           {skillCategories.map((category, catIdx) => (
             <motion.div
               key={category.title}

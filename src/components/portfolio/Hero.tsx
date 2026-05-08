@@ -253,7 +253,7 @@ export default function Hero() {
 
           {/* Tech stack pills */}
           <motion.div variants={itemVariants} className="flex flex-wrap justify-center lg:justify-start gap-2 md:gap-3 mb-6 md:mb-8">
-            {['React Native', 'Next.js', 'TypeScript', 'Node.js'].map((tech) => (
+            {['Flutter', 'React Native', 'C++', 'Python', 'Java', 'Next.js'].map((tech) => (
               <span
                 key={tech}
                 className="px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-white/5 border border-white/10 text-gray-300 text-xs md:text-sm font-medium hover:bg-[#C93CFF]/10 hover:border-[#C93CFF]/20 hover:text-[#C93CFF] transition-all duration-300 cursor-default"
