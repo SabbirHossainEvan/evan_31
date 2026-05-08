@@ -2,7 +2,7 @@
 
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { Briefcase, Calendar, MapPin } from 'lucide-react'
+import { Calendar, MapPin } from 'lucide-react'
 
 interface ExperienceItem {
   company: string
@@ -177,35 +177,6 @@ export default function Experience() {
               </div>
               <p className="text-white font-semibold text-sm md:text-base mb-1">{education.institution}</p>
               <p className="text-[#C93CFF] text-xs md:text-sm font-medium">{education.field}</p>
-            </motion.div>
-
-            {/* GitHub Stats */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.45 }}
-              whileHover={{ y: -4 }}
-              className="p-5 md:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#C93CFF]/15 transition-all"
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <Briefcase size={20} className="text-[#C93CFF]" />
-                <h3 className="text-lg font-bold text-white">GitHub Stats</h3>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  { label: 'Repositories', value: '25+' },
-                  { label: 'Contributions', value: '1,160+' },
-                  { label: 'Languages', value: '5+' },
-                  { label: 'Years Active', value: '3+' },
-                ].map((stat) => (
-                  <div key={stat.label}>
-                    <p className="text-xl md:text-2xl font-bold bg-gradient-to-r from-[#C93CFF] to-[#F0C7FF] bg-clip-text text-transparent">
-                      {stat.value}
-                    </p>
-                    <p className="text-[10px] md:text-xs text-gray-500 mt-0.5">{stat.label}</p>
-                  </div>
-                ))}
-              </div>
             </motion.div>
 
             {/* Currently Learning */}
