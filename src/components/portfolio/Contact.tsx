@@ -34,8 +34,8 @@ export default function Contact() {
     {
       icon: Mail,
       label: 'Email',
-      value: 'sabbirhossainevan@gmail.com',
-      href: 'mailto:sabbirhossainevan@gmail.com',
+      value: 'evansabbir31@gmail.com',
+      href: 'mailto:evansabbir31@gmail.com',
       color: 'from-emerald-400 to-teal-400',
     },
     {
@@ -48,8 +48,8 @@ export default function Contact() {
     {
       icon: Phone,
       label: 'Phone',
-      value: '+880 1XXXXXXXXX',
-      href: 'tel:+8801XXXXXXXXX',
+      value: '+880 1327284962',
+      href: 'tel:+8801327284962',
       color: 'from-cyan-400 to-sky-400',
     },
   ]
