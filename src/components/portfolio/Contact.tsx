@@ -18,16 +18,35 @@ export default function Contact() {
   const [formState, setFormState] = useState({ name: '', email: '', message: '' })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-    // Simulate submission
-    await new Promise(resolve => setTimeout(resolve, 1500))
-    setIsSubmitting(false)
-    setSubmitted(true)
-    setFormState({ name: '', email: '', message: '' })
-    setTimeout(() => setSubmitted(false), 4000)
+    setErrorMsg('')
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formState),
+      })
+
+      const data = await res.json()
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Failed to send message')
+      }
+
+      setSubmitted(true)
+      setFormState({ name: '', email: '', message: '' })
+      setTimeout(() => setSubmitted(false), 5000)
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Something went wrong. Please try again.'
+      setErrorMsg(message)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const contactInfo = [
@@ -223,6 +242,29 @@ export default function Contact() {
                   className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-gray-600 text-sm focus:outline-none focus:border-emerald-400/40 focus:bg-white/[0.07] transition-all resize-none"
                 />
               </div>
+
+              {/* Error message */}
+              {errorMsg && (
+                <motion.div
+                  initial={{ opacity: 0, y: -5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mb-4 px-4 py-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm"
+                >
+                  {errorMsg}
+                </motion.div>
+              )}
+
+              {/* Success message */}
+              {submitted && (
+                <motion.div
+                  initial={{ opacity: 0, y: -5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mb-4 px-4 py-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm"
+                >
+                  Message sent successfully! I&apos;ll get back to you soon.
+                </motion.div>
+              )}
+
               <motion.button
                 type="submit"
                 disabled={isSubmitting}
