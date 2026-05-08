@@ -34,14 +34,14 @@ export default function Footer() {
   }
 
   return (
-    <footer className="relative bg-[#050505] border-t border-white/5">
+    <footer className="relative bg-[#0D0D12] border-t border-[#C93CFF]/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="py-10 md:py-14">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             {/* Logo & tagline */}
             <div className="text-center md:text-left">
               <a href="#home" onClick={(e) => { e.preventDefault(); scrollToTop() }} className="inline-block">
-                <span className="text-xl md:text-2xl font-bold bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent">
+                <span className="text-xl md:text-2xl font-bold bg-gradient-to-r from-[#5E1B8C] via-[#C93CFF] to-[#F0C7FF] bg-clip-text text-transparent">
                   &lt;Evan /&gt;
                 </span>
               </a>
@@ -73,19 +73,19 @@ export default function Footer() {
               onClick={scrollToTop}
               whileHover={{ scale: 1.1, y: -2 }}
               whileTap={{ scale: 0.9 }}
-              className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-gray-400 hover:text-emerald-400 hover:border-emerald-400/20 transition-all"
+              className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-gray-400 hover:text-[#C93CFF] hover:border-[#C93CFF]/20 transition-all"
             >
               <ArrowUp size={18} />
             </motion.button>
           </div>
 
           {/* Divider */}
-          <div className="border-t border-white/5 mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="border-t border-[#C93CFF]/5 mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
             <p className="text-gray-600 text-xs">
               &copy; {new Date().getFullYear()} Md. Sabbir Hossain Evan. All rights reserved.
             </p>
             <p className="text-gray-600 text-xs flex items-center gap-1">
-              Made with <Heart size={12} className="text-emerald-400" /> in Dhaka, Bangladesh
+              Made with <Heart size={12} className="text-[#C93CFF]" /> in Dhaka, Bangladesh
             </p>
           </div>
         </div>

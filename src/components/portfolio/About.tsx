@@ -9,25 +9,25 @@ const highlights = [
     icon: Smartphone,
     title: 'Mobile Development',
     description: 'Expert in React Native cross-platform mobile apps with native-feeling performance and fluid UX.',
-    color: 'from-emerald-400 to-teal-400',
+    color: 'from-[#5E1B8C] to-[#C93CFF]',
   },
   {
     icon: Code2,
     title: 'Web Development',
     description: 'Building modern, scalable web apps with React, Next.js, and TypeScript for exceptional performance.',
-    color: 'from-teal-400 to-cyan-400',
+    color: 'from-[#9333EA] to-[#F0C7FF]',
   },
   {
     icon: Palette,
     title: 'UI/UX Design',
     description: 'Translating Figma designs to pixel-perfect, responsive interfaces with a keen eye for detail.',
-    color: 'from-cyan-400 to-sky-400',
+    color: 'from-[#F0C7FF] to-[#D946EF]',
   },
   {
     icon: Zap,
     title: 'Performance',
     description: 'Optimizing apps for speed and accessibility, delivering smooth experiences across all devices.',
-    color: 'from-sky-400 to-emerald-400',
+    color: 'from-[#D946EF] to-[#C93CFF]',
   },
 ]
 
@@ -36,9 +36,9 @@ export default function About() {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-    <section id="about" className="relative py-20 md:py-32 bg-[#050505] overflow-hidden">
+    <section id="about" className="relative py-20 md:py-32 bg-[#0D0D12] overflow-hidden">
       {/* Subtle gradient */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-emerald-500/5 blur-[150px] rounded-full" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#5E1B8C]/5 blur-[150px] rounded-full" />
 
       <div ref={ref} className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
@@ -48,11 +48,11 @@ export default function About() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12 md:mb-20"
         >
-          <span className="text-emerald-400 text-sm font-semibold tracking-widest uppercase mb-4 block">About Me</span>
+          <span className="text-[#C93CFF] text-sm font-semibold tracking-widest uppercase mb-4 block">About Me</span>
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 md:mb-6">
             Passionate About Creating
             <br />
-            <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#C93CFF] to-[#F0C7FF] bg-clip-text text-transparent">
               Digital Experiences
             </span>
           </h2>
@@ -67,7 +67,7 @@ export default function About() {
           >
             <div className="space-y-4 md:space-y-6">
               <p className="text-base md:text-lg text-gray-300 leading-relaxed">
-                I am a dedicated <span className="text-emerald-400 font-semibold">Mobile App & Web Developer</span> with
+                I am a dedicated <span className="text-[#C93CFF] font-semibold">Mobile App & Web Developer</span> with
                 3+ years of experience in creating clean, responsive, and user-centered digital solutions.
                 I specialize in cross-platform mobile development using React Native, and modern web
                 applications built with React and Next.js.
@@ -91,7 +91,7 @@ export default function About() {
                   { value: '1160+', label: 'Contributions' },
                 ].map((stat) => (
                   <div key={stat.label} className="text-center md:text-left">
-                    <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+                    <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-[#C93CFF] to-[#F0C7FF] bg-clip-text text-transparent">
                       {stat.value}
                     </div>
                     <div className="text-xs md:text-sm text-gray-500 mt-1">{stat.label}</div>
@@ -115,7 +115,7 @@ export default function About() {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.5 + i * 0.1 }}
                 whileHover={{ y: -5, scale: 1.02 }}
-                className="group p-5 md:p-6 rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:border-emerald-400/20 hover:bg-emerald-400/[0.03] transition-all duration-300"
+                className="group p-5 md:p-6 rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:border-[#C93CFF]/20 hover:bg-[#C93CFF]/[0.03] transition-all duration-300"
               >
                 <div className={`inline-flex p-2.5 rounded-xl bg-gradient-to-br ${item.color} mb-3 md:mb-4`}>
                   <item.icon size={20} className="text-black" />

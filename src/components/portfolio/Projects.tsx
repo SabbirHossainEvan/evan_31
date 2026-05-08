@@ -21,7 +21,7 @@ const projects: Project[] = [
     tags: ['React Native', 'JavaScript', 'Mobile UI'],
     category: 'mobile',
     github: 'https://github.com/SabbirHossainEvan/Shelfil_App_React_Native',
-    gradient: 'from-emerald-500/20 to-teal-500/20',
+    gradient: 'from-[#5E1B8C]/20 to-[#C93CFF]/20',
     icon: Smartphone,
   },
   {
@@ -30,7 +30,7 @@ const projects: Project[] = [
     tags: ['JavaScript', 'React', 'REST APIs'],
     category: 'web',
     github: 'https://github.com/SabbirHossainEvan/mediTrust',
-    gradient: 'from-teal-500/20 to-cyan-500/20',
+    gradient: 'from-[#9333EA]/20 to-[#F0C7FF]/20',
     icon: Globe,
   },
   {
@@ -39,7 +39,7 @@ const projects: Project[] = [
     tags: ['TypeScript', 'React', 'API Integration'],
     category: 'web',
     github: 'https://github.com/SabbirHossainEvan/MovieFlex',
-    gradient: 'from-cyan-500/20 to-sky-500/20',
+    gradient: 'from-[#F0C7FF]/20 to-[#D946EF]/20',
     icon: Globe,
   },
   {
@@ -48,7 +48,7 @@ const projects: Project[] = [
     tags: ['JavaScript', 'React', 'Node.js'],
     category: 'web',
     github: 'https://github.com/SabbirHossainEvan/car-doctor',
-    gradient: 'from-sky-500/20 to-emerald-500/20',
+    gradient: 'from-[#D946EF]/20 to-[#C93CFF]/20',
     icon: Globe,
   },
   {
@@ -57,7 +57,7 @@ const projects: Project[] = [
     tags: ['JavaScript', 'React', 'Fintech'],
     category: 'web',
     github: 'https://github.com/SabbirHossainEvan/KomTaka.com',
-    gradient: 'from-emerald-500/20 to-cyan-500/20',
+    gradient: 'from-[#5E1B8C]/20 to-[#F0C7FF]/20',
     icon: Smartphone,
   },
   {
@@ -66,7 +66,7 @@ const projects: Project[] = [
     tags: ['TypeScript', 'React Native', 'AI Integration'],
     category: 'mobile',
     github: 'https://github.com/SabbirHossainEvan/korean_vision',
-    gradient: 'from-teal-500/20 to-emerald-500/20',
+    gradient: 'from-[#9333EA]/20 to-[#C93CFF]/20',
     icon: Smartphone,
   },
 ]
@@ -79,9 +79,9 @@ export default function Projects() {
   const filtered = filter === 'all' ? projects : projects.filter(p => p.category === filter)
 
   return (
-    <section id="projects" className="relative py-20 md:py-32 bg-[#050505] overflow-hidden">
+    <section id="projects" className="relative py-20 md:py-32 bg-[#0D0D12] overflow-hidden">
       {/* Background */}
-      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-emerald-500/5 blur-[150px] rounded-full" />
+      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-[#5E1B8C]/5 blur-[150px] rounded-full" />
 
       <div ref={ref} className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
@@ -91,10 +91,10 @@ export default function Projects() {
           transition={{ duration: 0.6 }}
           className="text-center mb-10 md:mb-16"
         >
-          <span className="text-emerald-400 text-sm font-semibold tracking-widest uppercase mb-4 block">Projects</span>
+          <span className="text-[#C93CFF] text-sm font-semibold tracking-widest uppercase mb-4 block">Projects</span>
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 md:mb-6">
             Featured
-            <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent"> Works</span>
+            <span className="bg-gradient-to-r from-[#C93CFF] to-[#F0C7FF] bg-clip-text text-transparent"> Works</span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto text-sm md:text-base">
             A selection of my recent projects showcasing mobile app development and modern web applications.
@@ -114,7 +114,7 @@ export default function Projects() {
               onClick={() => setFilter(tab)}
               className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                 filter === tab
-                  ? 'bg-emerald-400/15 text-emerald-400 border border-emerald-400/30'
+                  ? 'bg-[#C93CFF]/15 text-[#C93CFF] border border-[#C93CFF]/30'
                   : 'bg-white/5 text-gray-400 border border-white/10 hover:text-white hover:bg-white/10'
               }`}
             >
@@ -134,7 +134,7 @@ export default function Projects() {
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.5, delay: 0.1 + i * 0.1 }}
               whileHover={{ y: -8 }}
-              className="group relative rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-emerald-400/20 overflow-hidden transition-all duration-300"
+              className="group relative rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#C93CFF]/20 overflow-hidden transition-all duration-300"
             >
               {/* Project gradient header */}
               <div className={`h-32 md:h-40 bg-gradient-to-br ${project.gradient} relative overflow-hidden`}>
@@ -151,8 +151,8 @@ export default function Projects() {
                 <div className="absolute top-3 right-3">
                   <span className={`px-2.5 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wider ${
                     project.category === 'mobile'
-                      ? 'bg-emerald-400/20 text-emerald-400 border border-emerald-400/30'
-                      : 'bg-cyan-400/20 text-cyan-400 border border-cyan-400/30'
+                      ? 'bg-[#C93CFF]/20 text-[#C93CFF] border border-[#C93CFF]/30'
+                      : 'bg-[#F0C7FF]/20 text-[#F0C7FF] border border-[#F0C7FF]/30'
                   }`}>
                     {project.category}
                   </span>
@@ -161,7 +161,7 @@ export default function Projects() {
 
               {/* Content */}
               <div className="p-4 md:p-5">
-                <h3 className="text-lg md:text-xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">
+                <h3 className="text-lg md:text-xl font-bold text-white mb-2 group-hover:text-[#C93CFF] transition-colors">
                   {project.title}
                 </h3>
                 <p className="text-gray-500 text-xs md:text-sm leading-relaxed mb-4 line-clamp-3">
@@ -189,7 +189,7 @@ export default function Projects() {
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
-                      className="flex items-center gap-1.5 text-xs text-gray-400 hover:text-emerald-400 transition-colors"
+                      className="flex items-center gap-1.5 text-xs text-gray-400 hover:text-[#C93CFF] transition-colors"
                     >
                       <Github size={14} />
                       <span>Code</span>
@@ -201,7 +201,7 @@ export default function Projects() {
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
-                    className="flex items-center gap-1.5 text-xs text-gray-400 hover:text-emerald-400 transition-colors ml-auto"
+                    className="flex items-center gap-1.5 text-xs text-gray-400 hover:text-[#C93CFF] transition-colors ml-auto"
                   >
                     <ExternalLink size={14} />
                     <span>View</span>

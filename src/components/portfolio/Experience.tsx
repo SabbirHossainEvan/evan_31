@@ -67,9 +67,9 @@ export default function Experience() {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-    <section id="experience" className="relative py-20 md:py-32 bg-[#080808] overflow-hidden">
+    <section id="experience" className="relative py-20 md:py-32 bg-[#0D0D12] overflow-hidden">
       {/* Background */}
-      <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-teal-500/5 blur-[150px] rounded-full" />
+      <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-purple-500/5 blur-[150px] rounded-full" />
 
       <div ref={ref} className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
@@ -79,10 +79,10 @@ export default function Experience() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12 md:mb-20"
         >
-          <span className="text-emerald-400 text-sm font-semibold tracking-widest uppercase mb-4 block">Experience</span>
+          <span className="text-[#C93CFF] text-sm font-semibold tracking-widest uppercase mb-4 block">Experience</span>
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 md:mb-6">
             Professional
-            <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent"> Journey</span>
+            <span className="bg-gradient-to-r from-[#C93CFF] to-[#F0C7FF] bg-clip-text text-transparent"> Journey</span>
           </h2>
         </motion.div>
 
@@ -91,7 +91,7 @@ export default function Experience() {
           <div className="lg:col-span-2">
             <div className="relative">
               {/* Timeline line */}
-              <div className="absolute left-4 md:left-6 top-0 bottom-0 w-px bg-gradient-to-b from-emerald-400/50 via-teal-400/30 to-transparent" />
+              <div className="absolute left-4 md:left-6 top-0 bottom-0 w-px bg-gradient-to-b from-[#C93CFF]/50 via-[#9333EA]/30 to-transparent" />
 
               <div className="space-y-6 md:space-y-8">
                 {experiences.map((exp, i) => (
@@ -103,27 +103,27 @@ export default function Experience() {
                     className="relative pl-12 md:pl-16"
                   >
                     {/* Timeline dot */}
-                    <div className="absolute left-2 md:left-4 top-6 w-4 md:w-4 h-4 rounded-full border-2 border-emerald-400 bg-[#080808] z-10">
+                    <div className="absolute left-2 md:left-4 top-6 w-4 md:w-4 h-4 rounded-full border-2 border-[#C93CFF] bg-[#0D0D12] z-10">
                       {exp.isCurrent && (
                         <motion.div
                           animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
                           transition={{ duration: 2, repeat: Infinity }}
-                          className="absolute inset-0 rounded-full bg-emerald-400"
+                          className="absolute inset-0 rounded-full bg-[#C93CFF]"
                         />
                       )}
                     </div>
 
                     <motion.div
                       whileHover={{ x: 4 }}
-                      className="p-5 md:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-emerald-400/15 transition-all duration-300"
+                      className="p-5 md:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#C93CFF]/15 transition-all duration-300"
                     >
                       <div className="flex flex-wrap items-start justify-between gap-2 mb-3">
                         <div>
                           <h3 className="text-lg md:text-xl font-bold text-white">{exp.role}</h3>
-                          <p className="text-emerald-400 font-semibold text-sm md:text-base">{exp.company}</p>
+                          <p className="text-[#C93CFF] font-semibold text-sm md:text-base">{exp.company}</p>
                         </div>
                         {exp.isCurrent && (
-                          <span className="px-2.5 py-0.5 rounded-full bg-emerald-400/10 text-emerald-400 text-[10px] md:text-xs font-semibold border border-emerald-400/20">
+                          <span className="px-2.5 py-0.5 rounded-full bg-[#C93CFF]/10 text-[#C93CFF] text-[10px] md:text-xs font-semibold border border-[#C93CFF]/20">
                             Current
                           </span>
                         )}
@@ -148,7 +148,7 @@ export default function Experience() {
                         {exp.highlights.map((h) => (
                           <span
                             key={h}
-                            className="px-2.5 py-1 rounded-lg bg-emerald-400/5 text-emerald-400/80 text-[10px] md:text-xs font-medium border border-emerald-400/10"
+                            className="px-2.5 py-1 rounded-lg bg-[#C93CFF]/5 text-[#C93CFF]/80 text-[10px] md:text-xs font-medium border border-[#C93CFF]/10"
                           >
                             {h}
                           </span>
@@ -169,14 +169,14 @@ export default function Experience() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.3 }}
               whileHover={{ y: -4 }}
-              className="p-5 md:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-emerald-400/15 transition-all"
+              className="p-5 md:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#C93CFF]/15 transition-all"
             >
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-2xl">{education.icon}</span>
                 <h3 className="text-lg font-bold text-white">Education</h3>
               </div>
               <p className="text-white font-semibold text-sm md:text-base mb-1">{education.institution}</p>
-              <p className="text-emerald-400 text-xs md:text-sm font-medium">{education.field}</p>
+              <p className="text-[#C93CFF] text-xs md:text-sm font-medium">{education.field}</p>
             </motion.div>
 
             {/* GitHub Stats */}
@@ -185,10 +185,10 @@ export default function Experience() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.45 }}
               whileHover={{ y: -4 }}
-              className="p-5 md:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-emerald-400/15 transition-all"
+              className="p-5 md:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#C93CFF]/15 transition-all"
             >
               <div className="flex items-center gap-3 mb-4">
-                <Briefcase size={20} className="text-emerald-400" />
+                <Briefcase size={20} className="text-[#C93CFF]" />
                 <h3 className="text-lg font-bold text-white">GitHub Stats</h3>
               </div>
               <div className="grid grid-cols-2 gap-4">
@@ -199,7 +199,7 @@ export default function Experience() {
                   { label: 'Years Active', value: '3+' },
                 ].map((stat) => (
                   <div key={stat.label}>
-                    <p className="text-xl md:text-2xl font-bold bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+                    <p className="text-xl md:text-2xl font-bold bg-gradient-to-r from-[#C93CFF] to-[#F0C7FF] bg-clip-text text-transparent">
                       {stat.value}
                     </p>
                     <p className="text-[10px] md:text-xs text-gray-500 mt-0.5">{stat.label}</p>
@@ -214,14 +214,14 @@ export default function Experience() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.6 }}
               whileHover={{ y: -4 }}
-              className="p-5 md:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-emerald-400/15 transition-all"
+              className="p-5 md:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#C93CFF]/15 transition-all"
             >
               <h3 className="text-lg font-bold text-white mb-4">Currently Exploring</h3>
               <div className="flex flex-wrap gap-2">
                 {['Flutter', 'GraphQL', 'AWS', 'CI/CD', 'App Store Deployment'].map((tech) => (
                   <span
                     key={tech}
-                    className="px-3 py-1.5 rounded-lg bg-white/5 text-gray-300 text-xs font-medium border border-white/5 hover:border-emerald-400/20 hover:text-emerald-400 transition-colors"
+                    className="px-3 py-1.5 rounded-lg bg-white/5 text-gray-300 text-xs font-medium border border-white/5 hover:border-[#C93CFF]/20 hover:text-[#C93CFF] transition-colors"
                   >
                     {tech}
                   </span>

@@ -20,30 +20,30 @@ const skillCategories: SkillCategory[] = [
     title: 'Mobile Development',
     icon: '📱',
     skills: [
-      { name: 'React Native', level: 92, color: 'from-emerald-400 to-teal-400' },
-      { name: 'Expo', level: 85, color: 'from-teal-400 to-cyan-400' },
-      { name: 'Mobile UI/UX', level: 88, color: 'from-cyan-400 to-sky-400' },
-      { name: 'App Performance', level: 82, color: 'from-sky-400 to-emerald-400' },
+      { name: 'React Native', level: 92, color: 'from-[#C93CFF] to-[#9333EA]' },
+      { name: 'Expo', level: 85, color: 'from-[#9333EA] to-[#F0C7FF]' },
+      { name: 'Mobile UI/UX', level: 88, color: 'from-[#F0C7FF] to-[#D946EF]' },
+      { name: 'App Performance', level: 82, color: 'from-[#D946EF] to-[#C93CFF]' },
     ],
   },
   {
     title: 'Frontend',
     icon: '🎨',
     skills: [
-      { name: 'React.js', level: 90, color: 'from-emerald-400 to-teal-400' },
-      { name: 'Next.js', level: 88, color: 'from-teal-400 to-cyan-400' },
-      { name: 'TypeScript', level: 85, color: 'from-cyan-400 to-sky-400' },
-      { name: 'Tailwind CSS', level: 92, color: 'from-sky-400 to-emerald-400' },
+      { name: 'React.js', level: 90, color: 'from-[#C93CFF] to-[#9333EA]' },
+      { name: 'Next.js', level: 88, color: 'from-[#9333EA] to-[#F0C7FF]' },
+      { name: 'TypeScript', level: 85, color: 'from-[#F0C7FF] to-[#D946EF]' },
+      { name: 'Tailwind CSS', level: 92, color: 'from-[#D946EF] to-[#C93CFF]' },
     ],
   },
   {
     title: 'Backend & Tools',
     icon: '⚙️',
     skills: [
-      { name: 'Node.js', level: 78, color: 'from-emerald-400 to-teal-400' },
-      { name: 'MongoDB', level: 75, color: 'from-teal-400 to-cyan-400' },
-      { name: 'Firebase', level: 85, color: 'from-cyan-400 to-sky-400' },
-      { name: 'REST APIs', level: 88, color: 'from-sky-400 to-emerald-400' },
+      { name: 'Node.js', level: 78, color: 'from-[#C93CFF] to-[#9333EA]' },
+      { name: 'MongoDB', level: 75, color: 'from-[#9333EA] to-[#F0C7FF]' },
+      { name: 'Firebase', level: 85, color: 'from-[#F0C7FF] to-[#D946EF]' },
+      { name: 'REST APIs', level: 88, color: 'from-[#D946EF] to-[#C93CFF]' },
     ],
   },
 ]
@@ -68,9 +68,9 @@ export default function Skills() {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-    <section id="skills" className="relative py-20 md:py-32 bg-[#080808] overflow-hidden">
+    <section id="skills" className="relative py-20 md:py-32 bg-[#0D0D12] overflow-hidden">
       {/* Background accent */}
-      <div className="absolute top-1/2 left-0 w-[600px] h-[600px] bg-teal-500/5 blur-[150px] rounded-full -translate-y-1/2" />
+      <div className="absolute top-1/2 left-0 w-[600px] h-[600px] bg-purple-500/5 blur-[150px] rounded-full -translate-y-1/2" />
 
       <div ref={ref} className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
@@ -80,10 +80,10 @@ export default function Skills() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12 md:mb-20"
         >
-          <span className="text-emerald-400 text-sm font-semibold tracking-widest uppercase mb-4 block">Skills & Expertise</span>
+          <span className="text-[#C93CFF] text-sm font-semibold tracking-widest uppercase mb-4 block">Skills & Expertise</span>
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 md:mb-6">
             Technologies I
-            <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent"> Master</span>
+            <span className="bg-gradient-to-r from-[#C93CFF] to-[#F0C7FF] bg-clip-text text-transparent"> Master</span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto text-sm md:text-base">
             Specializing in mobile-first development with a strong foundation in modern web technologies.
@@ -99,7 +99,7 @@ export default function Skills() {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: catIdx * 0.15 }}
-              className="p-5 md:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-emerald-400/15 transition-colors"
+              className="p-5 md:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#C93CFF]/15 transition-colors"
             >
               <div className="flex items-center gap-3 mb-5 md:mb-6">
                 <span className="text-2xl">{category.icon}</span>
@@ -142,8 +142,8 @@ export default function Skills() {
             <p className="text-sm text-gray-500 uppercase tracking-widest">Tech Stack</p>
           </div>
           <div className="relative">
-            <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#080808] to-transparent z-10" />
-            <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#080808] to-transparent z-10" />
+            <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#0D0D12] to-transparent z-10" />
+            <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#0D0D12] to-transparent z-10" />
             <motion.div
               animate={{ x: [0, -1200] }}
               transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
@@ -152,7 +152,7 @@ export default function Skills() {
               {[...techLogos, ...techLogos, ...techLogos].map((tech, i) => (
                 <div
                   key={`${tech.name}-${i}`}
-                  className="flex-shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/[0.03] border border-white/[0.06] text-gray-400 hover:text-emerald-400 hover:border-emerald-400/20 transition-colors cursor-default"
+                  className="flex-shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/[0.03] border border-white/[0.06] text-gray-400 hover:text-[#C93CFF] hover:border-[#C93CFF]/20 transition-colors cursor-default"
                 >
                   <span className="text-sm">{tech.svg}</span>
                   <span className="text-xs font-medium whitespace-nowrap">{tech.name}</span>

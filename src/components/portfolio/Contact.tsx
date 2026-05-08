@@ -63,21 +63,21 @@ export default function Contact() {
       label: 'Email',
       value: 'evansabbir31@gmail.com',
       href: 'mailto:evansabbir31@gmail.com',
-      color: 'from-emerald-400 to-teal-400',
+      color: 'from-[#C93CFF] to-[#9333EA]',
     },
     {
       icon: MapPin,
       label: 'Location',
       value: 'Dhaka, Bangladesh',
       href: '#',
-      color: 'from-teal-400 to-cyan-400',
+      color: 'from-[#9333EA] to-[#F0C7FF]',
     },
     {
       icon: Phone,
       label: 'Phone',
       value: '+880 1327284962',
       href: 'tel:+8801327284962',
-      color: 'from-cyan-400 to-sky-400',
+      color: 'from-[#F0C7FF] to-[#D946EF]',
     },
   ]
 
@@ -121,9 +121,9 @@ export default function Contact() {
   ]
 
   return (
-    <section id="contact" className="relative py-20 md:py-32 bg-[#050505] overflow-hidden">
+    <section id="contact" className="relative py-20 md:py-32 bg-[#0D0D12] overflow-hidden">
       {/* Background */}
-      <div className="absolute bottom-0 left-1/4 w-[600px] h-[600px] bg-emerald-500/5 blur-[150px] rounded-full" />
+      <div className="absolute bottom-0 left-1/4 w-[600px] h-[600px] bg-purple-500/5 blur-[150px] rounded-full" />
 
       <div ref={ref} className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
@@ -133,10 +133,10 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12 md:mb-20"
         >
-          <span className="text-emerald-400 text-sm font-semibold tracking-widest uppercase mb-4 block">Contact</span>
+          <span className="text-[#C93CFF] text-sm font-semibold tracking-widest uppercase mb-4 block">Contact</span>
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 md:mb-6">
             Let&apos;s Work
-            <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent"> Together</span>
+            <span className="bg-gradient-to-r from-[#C93CFF] to-[#F0C7FF] bg-clip-text text-transparent"> Together</span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto text-sm md:text-base">
             Have a project in mind or want to discuss an opportunity? I&apos;d love to hear from you.
@@ -160,14 +160,14 @@ export default function Contact() {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.3 + i * 0.1 }}
                 whileHover={{ x: 4 }}
-                className="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-emerald-400/20 transition-all group"
+                className="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#C93CFF]/20 transition-all group"
               >
                 <div className={`p-2.5 rounded-xl bg-gradient-to-br ${item.color} flex-shrink-0`}>
                   <item.icon size={18} className="text-black" />
                 </div>
                 <div>
                   <p className="text-xs text-gray-500 mb-0.5">{item.label}</p>
-                  <p className="text-sm md:text-base text-white font-medium group-hover:text-emerald-400 transition-colors">
+                  <p className="text-sm md:text-base text-white font-medium group-hover:text-[#C93CFF] transition-colors">
                     {item.value}
                   </p>
                 </div>
@@ -206,7 +206,7 @@ export default function Contact() {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-500/10 to-teal-500/10 border border-emerald-400/20 text-emerald-400 font-semibold text-sm hover:from-emerald-500/20 hover:to-teal-500/20 transition-all"
+                className="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#5E1B8C]/10 to-[#C93CFF]/10 border border-[#C93CFF]/20 text-[#C93CFF] font-semibold text-sm hover:from-[#9333EA]/20 hover:to-[#C93CFF]/20 transition-all"
               >
                 Download Resume
               </motion.button>
@@ -230,7 +230,7 @@ export default function Contact() {
                     onChange={(e) => setFormState(s => ({ ...s, name: e.target.value }))}
                     placeholder="John Doe"
                     required
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-gray-600 text-sm focus:outline-none focus:border-emerald-400/40 focus:bg-white/[0.07] transition-all"
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-gray-600 text-sm focus:outline-none focus:border-[#C93CFF]/40 focus:bg-white/[0.07] transition-all"
                   />
                 </div>
                 <div>
@@ -241,7 +241,7 @@ export default function Contact() {
                     onChange={(e) => setFormState(s => ({ ...s, email: e.target.value }))}
                     placeholder="john@example.com"
                     required
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-gray-600 text-sm focus:outline-none focus:border-emerald-400/40 focus:bg-white/[0.07] transition-all"
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-gray-600 text-sm focus:outline-none focus:border-[#C93CFF]/40 focus:bg-white/[0.07] transition-all"
                   />
                 </div>
               </div>
@@ -253,7 +253,7 @@ export default function Contact() {
                   placeholder="Tell me about your project..."
                   rows={5}
                   required
-                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-gray-600 text-sm focus:outline-none focus:border-emerald-400/40 focus:bg-white/[0.07] transition-all resize-none"
+                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-gray-600 text-sm focus:outline-none focus:border-[#C93CFF]/40 focus:bg-white/[0.07] transition-all resize-none"
                 />
               </div>
 
@@ -273,7 +273,7 @@ export default function Contact() {
                 <motion.div
                   initial={{ opacity: 0, y: -5 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="mb-4 px-4 py-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm"
+                  className="mb-4 px-4 py-3 rounded-xl bg-[#5E1B8C]/10 border border-[#5E1B8C]/20 text-[#C93CFF] text-sm"
                 >
                   Message sent successfully! I&apos;ll get back to you soon.
                 </motion.div>
@@ -284,7 +284,7 @@ export default function Contact() {
                 disabled={isSubmitting}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-semibold text-sm shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 transition-shadow disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#9333EA] to-[#C93CFF] text-white font-semibold text-sm shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 transition-shadow disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {isSubmitting ? (
                   <motion.div
