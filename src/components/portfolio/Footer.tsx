@@ -1,7 +1,23 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Github, Linkedin, Heart, ArrowUp } from 'lucide-react'
+import { Github, Linkedin, Heart, ArrowUp, Facebook, Instagram } from 'lucide-react'
+
+function XIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  )
+}
+
+const socialLinks = [
+  { icon: Github, href: 'https://github.com/SabbirHossainEvan', label: 'GitHub' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/in/sabbirhossainevan/', label: 'LinkedIn' },
+  { icon: Facebook, href: 'https://www.facebook.com/SabbirHossainEvan31', label: 'Facebook' },
+  { icon: XIcon, href: 'https://x.com/SabbirHossainEvan', label: 'X' },
+  { icon: Instagram, href: 'https://www.instagram.com/sabbirhossainevan', label: 'Instagram' },
+]
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -26,27 +42,21 @@ export default function Footer() {
             </div>
 
             {/* Social links */}
-            <div className="flex items-center gap-3">
-              <motion.a
-                href="https://github.com/SabbirHossainEvan"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.1, y: -2 }}
-                whileTap={{ scale: 0.9 }}
-                className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:border-white/20 transition-all"
-              >
-                <Github size={18} />
-              </motion.a>
-              <motion.a
-                href="https://www.linkedin.com/in/sabbirhossainevan/"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.1, y: -2 }}
-                whileTap={{ scale: 0.9 }}
-                className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:border-white/20 transition-all"
-              >
-                <Linkedin size={18} />
-              </motion.a>
+            <div className="flex items-center gap-2 md:gap-3">
+              {socialLinks.map((link) => (
+                <motion.a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={link.label}
+                  whileHover={{ scale: 1.1, y: -2 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:border-white/20 transition-all"
+                >
+                  <link.icon size={18} />
+                </motion.a>
+              ))}
             </div>
 
             {/* Back to top */}

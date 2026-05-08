@@ -2,7 +2,15 @@
 
 import { motion, useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
-import { Mail, MapPin, Send, Github, Linkedin, Phone, ArrowUpRight } from 'lucide-react'
+import { Mail, MapPin, Send, Github, Linkedin, Phone, ArrowUpRight, Facebook, Instagram } from 'lucide-react'
+
+function XIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  )
+}
 
 export default function Contact() {
   const ref = useRef(null)
@@ -58,6 +66,24 @@ export default function Contact() {
       label: 'LinkedIn',
       value: 'sabbirhossainevan',
       href: 'https://www.linkedin.com/in/sabbirhossainevan/',
+    },
+    {
+      icon: Facebook,
+      label: 'Facebook',
+      value: 'SabbirHossainEvan31',
+      href: 'https://www.facebook.com/SabbirHossainEvan31',
+    },
+    {
+      icon: XIcon,
+      label: 'X',
+      value: '@SabbirHossainEvan',
+      href: 'https://x.com/SabbirHossainEvan',
+    },
+    {
+      icon: Instagram,
+      label: 'Instagram',
+      value: '@sabbirhossainevan',
+      href: 'https://www.instagram.com/sabbirhossainevan',
     },
   ]
 
@@ -118,7 +144,7 @@ export default function Contact() {
             {/* Social Links */}
             <div className="pt-2 md:pt-4">
               <p className="text-xs text-gray-500 uppercase tracking-widest mb-3 md:mb-4">Social Profiles</p>
-              <div className="flex gap-3">
+              <div className="flex flex-wrap gap-2 md:gap-3">
                 {socialLinks.map((link) => (
                   <motion.a
                     key={link.label}
@@ -127,10 +153,10 @@ export default function Contact() {
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.9 }}
-                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/10 transition-all"
+                    className="flex items-center gap-2 px-3 md:px-4 py-2 md:py-2.5 rounded-xl bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/10 transition-all"
                   >
-                    <link.icon size={18} />
-                    <span className="text-sm font-medium">{link.label}</span>
+                    {typeof link.icon === 'function' ? <link.icon size={18} /> : null}
+                    <span className="text-xs md:text-sm font-medium">{link.label}</span>
                     <ArrowUpRight size={12} />
                   </motion.a>
                 ))}
