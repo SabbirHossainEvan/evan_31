@@ -218,7 +218,7 @@ export default function Experience() {
             >
               <h3 className="text-lg font-bold text-white mb-4">Currently Exploring</h3>
               <div className="flex flex-wrap gap-2">
-                {['Flutter', 'GraphQL', 'AWS', 'CI/CD', 'App Store Deployment'].map((tech) => (
+                {['Flutter', 'GraphQL', 'AWS', 'CI/CD', 'App Store Deployment', 'Machine Learning', 'Deep Learning', 'Competitive Programming', 'DSA'].map((tech) => (
                   <span
                     key={tech}
                     className="px-3 py-1.5 rounded-lg bg-white/5 text-gray-300 text-xs font-medium border border-white/5 hover:border-[#C93CFF]/20 hover:text-[#C93CFF] transition-colors"
