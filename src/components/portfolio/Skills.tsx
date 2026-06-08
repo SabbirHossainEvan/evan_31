@@ -1,6 +1,7 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
+import { BrainCircuit, Gauge, GitBranch, Timer, Trophy } from 'lucide-react'
 import { useRef } from 'react'
 
 interface Skill {
@@ -78,6 +79,31 @@ const techLogos = [
   { name: 'Figma', svg: '🎯' },
 ]
 
+const problemSolvingSkills = [
+  { name: 'Algorithmic Thinking', level: 92 },
+  { name: 'Data Structures', level: 88 },
+  { name: 'Time Complexity Analysis', level: 86 },
+  { name: 'Debugging Under Pressure', level: 90 },
+]
+
+const problemSolvingHighlights = [
+  {
+    title: 'Pattern Recognition',
+    description: 'Breaking unfamiliar problems into known techniques like greedy, recursion, DP, and graph traversal.',
+    icon: BrainCircuit,
+  },
+  {
+    title: 'Optimized Solutions',
+    description: 'Choosing efficient approaches by comparing constraints, edge cases, and time complexity.',
+    icon: Gauge,
+  },
+  {
+    title: 'Contest Mindset',
+    description: 'Solving with focus, speed, and clean implementation during timed challenges.',
+    icon: Timer,
+  },
+]
+
 export default function Skills() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
@@ -145,6 +171,96 @@ export default function Skills() {
             </motion.div>
           ))}
         </div>
+
+        {/* Competitive Programming */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.45 }}
+          className="mb-12 md:mb-16 overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.025]"
+        >
+          <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
+            <div className="relative p-6 md:p-8 border-b lg:border-b-0 lg:border-r border-white/[0.06]">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(201,60,255,0.14),transparent_34%)]" />
+              <div className="relative">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#C93CFF]/10 border border-[#C93CFF]/20 text-[#F0C7FF] text-xs font-semibold uppercase tracking-widest mb-5">
+                  <Trophy size={14} />
+                  Competitive Programming
+                </div>
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                  Problem Solving Ability
+                </h3>
+                <p className="text-sm md:text-base text-gray-400 leading-relaxed mb-6">
+                  I approach coding challenges by reading constraints carefully, building the simplest correct idea first,
+                  then optimizing it with strong data structures and algorithmic patterns.
+                </p>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="rounded-xl bg-[#0D0D12]/70 border border-white/[0.06] p-4">
+                    <div className="flex items-center gap-2 text-[#C93CFF] mb-2">
+                      <GitBranch size={18} />
+                      <span className="text-xs uppercase tracking-widest">Focus</span>
+                    </div>
+                    <p className="text-sm font-semibold text-white">DSA + Logic</p>
+                  </div>
+                  <div className="rounded-xl bg-[#0D0D12]/70 border border-white/[0.06] p-4">
+                    <div className="flex items-center gap-2 text-[#C93CFF] mb-2">
+                      <Timer size={18} />
+                      <span className="text-xs uppercase tracking-widest">Style</span>
+                    </div>
+                    <p className="text-sm font-semibold text-white">Fast + Clean</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-6 md:p-8">
+              <div className="space-y-5 mb-8">
+                {problemSolvingSkills.map((skill, skillIdx) => (
+                  <div key={skill.name}>
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-sm text-gray-300 font-medium">{skill.name}</span>
+                      <span className="text-xs text-gray-500">{skill.level}%</span>
+                    </div>
+                    <div className="h-2 bg-white/5 rounded-full overflow-hidden">
+                      <motion.div
+                        initial={{ width: 0 }}
+                        animate={isInView ? { width: `${skill.level}%` } : {}}
+                        transition={{
+                          duration: 1.2,
+                          delay: 0.55 + skillIdx * 0.12,
+                          ease: 'easeOut',
+                        }}
+                        className="h-full rounded-full bg-gradient-to-r from-[#C93CFF] via-[#D946EF] to-[#F0C7FF]"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="grid sm:grid-cols-3 gap-3">
+                {problemSolvingHighlights.map((item, itemIdx) => {
+                  const Icon = item.icon
+
+                  return (
+                    <motion.div
+                      key={item.title}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={isInView ? { opacity: 1, y: 0 } : {}}
+                      transition={{ duration: 0.45, delay: 0.75 + itemIdx * 0.1 }}
+                      className="rounded-xl bg-white/[0.03] border border-white/[0.06] p-4 hover:border-[#C93CFF]/20 transition-colors"
+                    >
+                      <div className="w-9 h-9 rounded-lg bg-[#C93CFF]/10 border border-[#C93CFF]/15 flex items-center justify-center text-[#F0C7FF] mb-3">
+                        <Icon size={18} />
+                      </div>
+                      <h4 className="text-sm font-semibold text-white mb-2">{item.title}</h4>
+                      <p className="text-xs leading-relaxed text-gray-500">{item.description}</p>
+                    </motion.div>
+                  )
+                })}
+              </div>
+            </div>
+          </div>
+        </motion.div>
 
         {/* Tech logos marquee */}
         <motion.div
