@@ -20,20 +20,20 @@ const skillCategories: SkillCategory[] = [
     title: 'Mobile Development',
     icon: '📱',
     skills: [
-      { name: 'React Native', level: 92, color: 'from-[#C93CFF] to-[#9333EA]' },
-      { name: 'Expo', level: 85, color: 'from-[#9333EA] to-[#F0C7FF]' },
-      { name: 'Mobile UI/UX', level: 88, color: 'from-[#F0C7FF] to-[#D946EF]' },
-      { name: 'App Performance', level: 82, color: 'from-[#D946EF] to-[#C93CFF]' },
+      { name: 'React Native', level: 100, color: 'from-[#C93CFF] to-[#9333EA]' },
+      { name: 'Expo', level: 100, color: 'from-[#9333EA] to-[#F0C7FF]' },
+      { name: 'Mobile UI/UX', level: 100, color: 'from-[#F0C7FF] to-[#D946EF]' },
+      { name: 'App Performance', level: 100, color: 'from-[#D946EF] to-[#C93CFF]' },
     ],
   },
   {
     title: 'Frontend',
     icon: '🎨',
     skills: [
-      { name: 'React.js', level: 90, color: 'from-[#C93CFF] to-[#9333EA]' },
-      { name: 'Next.js', level: 88, color: 'from-[#9333EA] to-[#F0C7FF]' },
-      { name: 'TypeScript', level: 85, color: 'from-[#F0C7FF] to-[#D946EF]' },
-      { name: 'Tailwind CSS', level: 92, color: 'from-[#D946EF] to-[#C93CFF]' },
+      { name: 'React.js', level: 100, color: 'from-[#C93CFF] to-[#9333EA]' },
+      { name: 'Next.js', level: 100, color: 'from-[#9333EA] to-[#F0C7FF]' },
+      { name: 'TypeScript', level: 100, color: 'from-[#F0C7FF] to-[#D946EF]' },
+      { name: 'Tailwind CSS', level: 100, color: 'from-[#D946EF] to-[#C93CFF]' },
     ],
   },
   {
@@ -50,10 +50,10 @@ const skillCategories: SkillCategory[] = [
     title: 'Backend & Tools',
     icon: '⚙️',
     skills: [
-      { name: 'Node.js', level: 78, color: 'from-[#C93CFF] to-[#9333EA]' },
-      { name: 'MongoDB', level: 75, color: 'from-[#9333EA] to-[#F0C7FF]' },
-      { name: 'Firebase', level: 85, color: 'from-[#F0C7FF] to-[#D946EF]' },
-      { name: 'REST APIs', level: 88, color: 'from-[#D946EF] to-[#C93CFF]' },
+      { name: 'Node.js', level: 100, color: 'from-[#C93CFF] to-[#9333EA]' },
+      { name: 'MongoDB', level: 100, color: 'from-[#9333EA] to-[#F0C7FF]' },
+      { name: 'Firebase', level: 100, color: 'from-[#F0C7FF] to-[#D946EF]' },
+      { name: 'REST APIs', level: 100, color: 'from-[#D946EF] to-[#C93CFF]' },
     ],
   },
 ]
