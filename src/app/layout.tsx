@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
+import { WhatsAppWidget } from "@/components/WhatsAppWidget";
 
 const inter = Inter({
   variable: "--font-geist-sans",
@@ -54,6 +55,7 @@ export default function RootLayout({
         className={`${inter.variable} antialiased bg-[#0D0D12] text-white`}
       >
         {children}
+        <WhatsAppWidget />
         <Toaster />
       </body>
     </html>
