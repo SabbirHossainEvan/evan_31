@@ -10,7 +10,7 @@ function PhoneMockup() {
       initial={{ opacity: 0, y: 40, rotateY: -10 }}
       animate={{ opacity: 1, y: 0, rotateY: 0 }}
       transition={{ duration: 1, delay: 0.8, ease: 'easeOut' }}
-      className="relative hidden lg:block"
+      className="relative block"
     >
       <motion.div
         animate={{ y: [-8, 8, -8] }}
@@ -18,9 +18,9 @@ function PhoneMockup() {
         className="relative"
       >
         {/* Phone frame */}
-        <div className="w-[260px] h-[520px] rounded-[40px] bg-gradient-to-b from-gray-800 to-gray-900 p-2 shadow-2xl shadow-purple-500/10 border border-white/10">
+        <div className="w-[220px] h-[440px] sm:w-[240px] sm:h-[480px] lg:w-[260px] lg:h-[520px] rounded-[34px] lg:rounded-[40px] bg-gradient-to-b from-gray-800 to-gray-900 p-2 shadow-2xl shadow-purple-500/10 border border-white/10">
           {/* Phone screen */}
-          <div className="w-full h-full rounded-[32px] bg-[#0D0D12] overflow-hidden relative">
+          <div className="w-full h-full rounded-[27px] lg:rounded-[32px] bg-[#0D0D12] overflow-hidden relative">
             {/* Status bar */}
             <div className="flex items-center justify-between px-5 pt-3 pb-2">
               <span className="text-[10px] text-white/60">9:41</span>
@@ -117,7 +117,7 @@ export default function Hero() {
   }
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0D0D12]">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0D0D12] pt-24 pb-16 md:pt-28 lg:pt-32">
       {/* Animated gradient orbs */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
@@ -185,38 +185,6 @@ export default function Hero() {
           animate="visible"
           className="flex-1 text-center lg:text-left"
         >
-          {/* Avatar - mobile/tablet */}
-          <motion.div
-            variants={itemVariants}
-            className="mb-6 lg:hidden flex justify-center"
-          >
-            <div className="relative">
-              {/* Rotating border ring - mobile */}
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                className="absolute -inset-1 rounded-full"
-                style={{
-                  background: 'conic-gradient(from 0deg, #C93CFF, #9333EA, #F0C7FF, #5E1B8C, #C93CFF)',
-                  padding: '2px',
-                }}
-              >
-                <div className="w-full h-full rounded-full bg-[#0D0D12]" />
-              </motion.div>
-              <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-[#C93CFF]/30">
-                <Image
-                  src="/md.sabbir_hossain.png"
-                  alt="Sabbir Hossain Evan"
-                  width={96}
-                  height={96}
-                  className="object-cover object-top"
-                  priority
-                />
-              </div>
-              <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-[#C93CFF] border-2 border-[#0D0D12]" />
-            </div>
-          </motion.div>
-
           {/* Status badge */}
           <motion.div variants={itemVariants} className="mb-4 md:mb-6">
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#C93CFF]/10 border border-[#C93CFF]/20 text-[#C93CFF] text-xs sm:text-sm font-medium">
@@ -264,7 +232,7 @@ export default function Hero() {
           </motion.div>
 
           {/* CTA Buttons */}
-          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 md:gap-4">
+          <motion.div variants={itemVariants} className="hidden lg:flex items-center justify-start gap-4">
             <motion.a
               href="#projects"
               onClick={(e) => { e.preventDefault(); document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }) }}
@@ -286,7 +254,7 @@ export default function Hero() {
           </motion.div>
 
           {/* Social Links */}
-          <motion.div variants={itemVariants} className="flex items-center justify-center lg:justify-start gap-3 mt-6 md:mt-8">
+          <motion.div variants={itemVariants} className="mt-8 hidden items-center justify-start gap-3 lg:flex">
             <motion.a
               href="https://github.com/SabbirHossainEvan"
               target="_blank"
@@ -319,14 +287,14 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* Right: Phone Mockup + Profile Image (desktop) */}
-        <div className="flex-shrink-0 relative">
-          {/* Profile image with rotating neon border - desktop only */}
+        {/* Right: Phone Mockup + Profile Image */}
+        <div className="relative mx-auto mt-10 w-[310px] flex-shrink-0 pl-16 sm:mt-12 sm:w-[340px] sm:pl-20 lg:mt-6 lg:w-auto lg:pl-0">
+          {/* Profile image with rotating neon border */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="hidden lg:block absolute -top-12 -left-28 z-20"
+            className="absolute -left-1 top-0 z-20 sm:-left-2 lg:-top-2 lg:-left-28"
           >
             <div className="relative">
               {/* Outer glow */}
@@ -344,7 +312,7 @@ export default function Hero() {
                 <div className="w-full h-full rounded-full bg-[#0D0D12]" />
               </motion.div>
               {/* Image */}
-              <div className="relative w-[100px] h-[100px] rounded-full overflow-hidden border-2 border-[#C93CFF]/20 bg-[#0D0D12]">
+              <div className="relative h-[86px] w-[86px] overflow-hidden rounded-full border-2 border-[#C93CFF]/20 bg-[#0D0D12] sm:h-[96px] sm:w-[96px] lg:h-[100px] lg:w-[100px]">
                 <Image
                   src="/md.sabbir_hossain.png"
                   alt="Sabbir Hossain Evan"
@@ -358,7 +326,7 @@ export default function Hero() {
               <div className="absolute -bottom-0.5 -right-0.5 z-10">
                 <div className="relative">
                   <span className="absolute inset-0 rounded-full bg-[#C93CFF] animate-ping opacity-50" />
-                  <span className="relative flex w-4 h-4 rounded-full bg-[#C93CFF] border-2 border-[#0D0D12]" />
+                  <span className="relative flex h-4 w-4 rounded-full border-2 border-[#0D0D12] bg-[#C93CFF] sm:h-5 sm:w-5 lg:h-4 lg:w-4" />
                 </div>
               </div>
             </div>
@@ -371,7 +339,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1.5, duration: 0.6 }}
-            className="hidden lg:flex absolute top-16 -right-6 items-center gap-2 px-3 py-2 rounded-xl bg-[#1A0A2E]/80 backdrop-blur-sm border border-white/10 shadow-xl"
+            className="absolute -right-1 top-14 flex items-center gap-2 rounded-xl border border-white/10 bg-[#1A0A2E]/80 px-3 py-2 shadow-xl backdrop-blur-sm sm:-right-4 lg:-right-6 lg:top-16"
           >
             <span className="text-lg">⚛️</span>
             <span className="text-xs text-gray-300 font-medium">React Native</span>
@@ -381,7 +349,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1.8, duration: 0.6 }}
-            className="hidden lg:flex absolute bottom-24 -left-8 items-center gap-2 px-3 py-2 rounded-xl bg-[#1A0A2E]/80 backdrop-blur-sm border border-white/10 shadow-xl"
+            className="absolute bottom-20 left-1 flex items-center gap-2 rounded-xl border border-white/10 bg-[#1A0A2E]/80 px-3 py-2 shadow-xl backdrop-blur-sm sm:left-3 lg:bottom-24 lg:-left-8"
           >
             <span className="text-lg">🚀</span>
             <span className="text-xs text-gray-300 font-medium">1,160+ Commits</span>
@@ -391,12 +359,73 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 2.1, duration: 0.6 }}
-            className="hidden lg:flex absolute -bottom-4 left-1/2 -translate-x-1/2 items-center gap-2 px-3 py-2 rounded-xl bg-[#1A0A2E]/80 backdrop-blur-sm border border-[#C93CFF]/20 shadow-xl shadow-[#C93CFF]/25"
+            className="absolute -bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-xl border border-[#C93CFF]/20 bg-[#1A0A2E]/80 px-3 py-2 shadow-xl shadow-[#C93CFF]/25 backdrop-blur-sm"
           >
             <span className="w-2 h-2 rounded-full bg-[#C93CFF] animate-pulse" />
             <span className="text-xs text-[#C93CFF] font-medium">Open to Work</span>
           </motion.div>
         </div>
+
+        {/* Mobile CTA Buttons + Social Links */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="flex w-full flex-col items-center gap-4 lg:hidden"
+        >
+          <motion.div variants={itemVariants} className="flex w-full flex-col items-center gap-3">
+            <motion.a
+              href="#projects"
+              onClick={(e) => { e.preventDefault(); document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }) }}
+              whileHover={{ scale: 1.03, boxShadow: '0 0 30px rgba(147, 51, 234, 0.3)' }}
+              whileTap={{ scale: 0.95 }}
+              className="w-full max-w-sm rounded-xl bg-gradient-to-r from-[#9333EA] to-[#C93CFF] px-8 py-3.5 text-center text-sm font-semibold text-white shadow-lg shadow-purple-500/25 transition-shadow hover:shadow-purple-500/40"
+            >
+              View My Work
+            </motion.a>
+            <motion.a
+              href="#contact"
+              onClick={(e) => { e.preventDefault(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }) }}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-full max-w-sm rounded-xl border border-white/10 bg-white/5 px-8 py-3.5 text-center text-sm font-semibold text-white transition-colors hover:bg-white/10"
+            >
+              Get In Touch
+            </motion.a>
+          </motion.div>
+
+          <motion.div variants={itemVariants} className="flex items-center justify-center gap-3">
+            <motion.a
+              href="https://github.com/SabbirHossainEvan"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.15, y: -2 }}
+              whileTap={{ scale: 0.9 }}
+              className="rounded-xl border border-white/10 bg-white/5 p-2.5 text-gray-400 transition-all hover:border-white/20 hover:bg-white/10 hover:text-white"
+            >
+              <Github size={18} />
+            </motion.a>
+            <motion.a
+              href="https://www.linkedin.com/in/sabbirhossainevan/"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.15, y: -2 }}
+              whileTap={{ scale: 0.9 }}
+              className="rounded-xl border border-white/10 bg-white/5 p-2.5 text-gray-400 transition-all hover:border-white/20 hover:bg-white/10 hover:text-white"
+            >
+              <Linkedin size={18} />
+            </motion.a>
+            <motion.a
+              href="#contact"
+              onClick={(e) => { e.preventDefault(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }) }}
+              whileHover={{ scale: 1.15, y: -2 }}
+              whileTap={{ scale: 0.9 }}
+              className="rounded-xl border border-white/10 bg-white/5 p-2.5 text-gray-400 transition-all hover:border-white/20 hover:bg-white/10 hover:text-white"
+            >
+              <Download size={18} />
+            </motion.a>
+          </motion.div>
+        </motion.div>
       </div>
 
       {/* Scroll indicator */}
