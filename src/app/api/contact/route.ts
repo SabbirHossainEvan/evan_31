@@ -1,10 +1,33 @@
 import { NextRequest, NextResponse } from 'next/server'
 import nodemailer from 'nodemailer'
 
+export const runtime = 'nodejs'
+
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;')
+}
+
+function isAuthError(error: unknown) {
+  return (
+    typeof error === 'object' &&
+    error !== null &&
+    ('code' in error || 'responseCode' in error) &&
+    ((error as { code?: unknown }).code === 'EAUTH' ||
+      (error as { responseCode?: unknown }).responseCode === 535)
+  )
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { name, email, message } = body
+    const name = String(body.name || '').trim()
+    const email = String(body.email || '').trim()
+    const message = String(body.message || '').trim()
 
     // Validate required fields
     if (!name || !email || !message) {
@@ -23,21 +46,40 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    const smtpUser = process.env.SMTP_USER
+    const smtpPass = process.env.SMTP_PASS
+    const contactEmail = process.env.CONTACT_EMAIL || smtpUser
+    const smtpHost = process.env.SMTP_HOST || 'smtp.gmail.com'
+    const isGmailSmtp = smtpHost.includes('gmail.com')
+    const authPass = isGmailSmtp ? smtpPass?.replace(/[\s-]/g, '') : smtpPass
+
+    if (!smtpUser || !authPass || !contactEmail) {
+      console.error('Contact form SMTP configuration is missing required values')
+      return NextResponse.json(
+        { error: 'Email service is not configured yet' },
+        { status: 500 }
+      )
+    }
+
+    const safeName = escapeHtml(name)
+    const safeEmail = escapeHtml(email)
+    const safeMessage = escapeHtml(message)
+
     // Configure transporter
     const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST || 'smtp.gmail.com',
+      host: smtpHost,
       port: Number(process.env.SMTP_PORT) || 587,
       secure: process.env.SMTP_SECURE === 'true',
       auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
+        user: smtpUser,
+        pass: authPass,
       },
     })
 
     // Email to site owner
     const ownerMailOptions = {
-      from: `"Portfolio Contact" <${process.env.SMTP_USER}>`,
-      to: process.env.CONTACT_EMAIL || process.env.SMTP_USER,
+      from: `"Portfolio Contact" <${smtpUser}>`,
+      to: contactEmail,
       replyTo: email,
       subject: `New Contact Form Message from ${name}`,
       html: `
@@ -48,18 +90,18 @@ export async function POST(request: NextRequest) {
           <div style="padding: 32px;">
             <div style="margin-bottom: 24px;">
               <p style="color: #6b7280; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 4px 0;">From</p>
-              <p style="color: #ffffff; font-size: 16px; font-weight: 600; margin: 0;">${name}</p>
+              <p style="color: #ffffff; font-size: 16px; font-weight: 600; margin: 0;">${safeName}</p>
             </div>
             <div style="margin-bottom: 24px;">
               <p style="color: #6b7280; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 4px 0;">Email</p>
               <p style="margin: 0;">
-                <a href="mailto:${email}" style="color: #34d399; font-size: 16px; text-decoration: none;">${email}</a>
+                <a href="mailto:${safeEmail}" style="color: #34d399; font-size: 16px; text-decoration: none;">${safeEmail}</a>
               </p>
             </div>
             <div style="margin-bottom: 0;">
               <p style="color: #6b7280; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 8px 0;">Message</p>
               <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px;">
-                <p style="color: #d1d5db; font-size: 14px; line-height: 1.7; margin: 0; white-space: pre-wrap;">${message.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
+                <p style="color: #d1d5db; font-size: 14px; line-height: 1.7; margin: 0; white-space: pre-wrap;">${safeMessage}</p>
               </div>
             </div>
           </div>
@@ -72,7 +114,7 @@ export async function POST(request: NextRequest) {
 
     // Auto-reply to sender
     const autoReplyOptions = {
-      from: `"Sabbir Hossain Evan" <${process.env.SMTP_USER}>`,
+      from: `"Sabbir Hossain Evan" <${smtpUser}>`,
       to: email,
       subject: `Thanks for reaching out, ${name}!`,
       html: `
@@ -82,7 +124,7 @@ export async function POST(request: NextRequest) {
           </div>
           <div style="padding: 32px;">
             <p style="color: #d1d5db; font-size: 16px; line-height: 1.7; margin: 0 0 16px 0;">
-              Hi <strong style="color: #ffffff;">${name}</strong>,
+              Hi <strong style="color: #ffffff;">${safeName}</strong>,
             </p>
             <p style="color: #d1d5db; font-size: 14px; line-height: 1.7; margin: 0 0 16px 0;">
               Thank you for reaching out through my portfolio! I appreciate your interest and will get back to you as soon as possible.
@@ -118,9 +160,16 @@ export async function POST(request: NextRequest) {
     )
   } catch (error: unknown) {
     console.error('Contact form error:', error)
-    const errorMessage = error instanceof Error ? error.message : 'Failed to send message'
+
+    if (isAuthError(error)) {
+      return NextResponse.json(
+        { error: 'Email login failed. Use a valid Gmail App Password in SMTP_PASS.' },
+        { status: 500 }
+      )
+    }
+
     return NextResponse.json(
-      { error: errorMessage },
+      { error: 'Failed to send message. Please try again later.' },
       { status: 500 }
     )
   }
