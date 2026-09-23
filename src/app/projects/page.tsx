@@ -124,15 +124,7 @@ export default function ProjectsPage() {
         <div className="cyber-grid absolute inset-0 opacity-40" />
 
         <div className="relative mx-auto max-w-7xl px-4 pb-12 pt-24 sm:px-6 md:pb-16 md:pt-28 lg:px-8">
-          <div className="mb-14 flex justify-end">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-gray-200 transition hover:border-[#C93CFF]/30 hover:bg-[#C93CFF]/10 hover:text-white"
-            >
-              <ArrowLeft size={16} />
-              Back to home
-            </Link>
-          </div>
+
 
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -140,9 +132,7 @@ export default function ProjectsPage() {
             transition={{ duration: 0.55 }}
             className="max-w-3xl"
           >
-            <span className="mb-4 block text-sm font-semibold uppercase tracking-widest text-[#C93CFF]">
-              Projects
-            </span>
+
             <h1 className="text-5xl font-black tracking-tight text-white sm:text-6xl md:text-7xl">
               All projects.
             </h1>
