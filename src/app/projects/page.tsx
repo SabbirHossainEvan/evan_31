@@ -1,16 +1,17 @@
 'use client'
 
-import Link from 'next/link'
 import { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import {
-  ArrowLeft,
   ExternalLink,
   Github,
   MonitorSmartphone,
   Smartphone,
 } from 'lucide-react'
 import Navbar from '@/components/portfolio/Navbar'
+import ProjectLightbox, {
+  type ProjectGalleryItem,
+} from '@/components/portfolio/ProjectLightbox'
 
 type ProjectCategory = 'All' | 'Mobile' | 'Web'
 
@@ -19,7 +20,7 @@ interface Project {
   category: Exclude<ProjectCategory, 'All'>
   description: string
   tags: string[]
-  image: string
+  images: string[]
   orientation: 'mobile' | 'desktop'
   github: string
 }
@@ -33,8 +34,11 @@ const projects: Project[] = [
     description:
       'A modern book discovery and reading management mobile app built with React Native. Features personalized recommendations, reading progress tracking, and social sharing capabilities.',
     tags: ['React Native', 'JavaScript', 'Mobile UI'],
-    image:
-      'https://placehold.co/520x900/111827/C93CFF?text=Shelfil+App',
+    images: [
+      'https://placehold.co/520x900/111827/C93CFF?text=Shelfil+Home',
+      'https://placehold.co/520x900/171022/F0C7FF?text=Book+Details',
+      'https://placehold.co/520x900/101624/60A5FA?text=Reading+List',
+    ],
     orientation: 'mobile',
     github: 'https://github.com/SabbirHossainEvan/Shelfil_App_React_Native',
   },
@@ -44,8 +48,11 @@ const projects: Project[] = [
     description:
       'A healthcare and telemedicine web application providing secure patient-doctor communication, appointment scheduling, and medical records management with an intuitive interface.',
     tags: ['JavaScript', 'React', 'REST APIs'],
-    image:
-      'https://placehold.co/900x560/101624/F0C7FF?text=MediTrust',
+    images: [
+      'https://placehold.co/900x560/101624/F0C7FF?text=MediTrust+Dashboard',
+      'https://placehold.co/900x560/12201b/34D399?text=Appointments',
+      'https://placehold.co/900x560/111827/C93CFF?text=Patient+Records',
+    ],
     orientation: 'desktop',
     github: 'https://github.com/SabbirHossainEvan/mediTrust',
   },
@@ -55,8 +62,11 @@ const projects: Project[] = [
     description:
       'A sleek movie discovery and streaming platform with real-time search, trending recommendations, and detailed movie information. Built with TypeScript and modern React patterns.',
     tags: ['TypeScript', 'React', 'API Integration'],
-    image:
-      'https://placehold.co/900x560/15111f/C93CFF?text=MovieFlex',
+    images: [
+      'https://placehold.co/900x560/15111f/C93CFF?text=MovieFlex+Home',
+      'https://placehold.co/900x560/111827/F0C7FF?text=Movie+Details',
+      'https://placehold.co/900x560/101624/D946EF?text=Search+Results',
+    ],
     orientation: 'desktop',
     github: 'https://github.com/SabbirHossainEvan/MovieFlex',
   },
@@ -66,8 +76,11 @@ const projects: Project[] = [
     description:
       'An automotive service booking platform that connects car owners with nearby mechanics. Features real-time tracking, service history, and secure payment integration.',
     tags: ['JavaScript', 'React', 'Node.js'],
-    image:
+    images: [
       'https://placehold.co/900x560/111827/D946EF?text=Car+Doctor',
+      'https://placehold.co/900x560/101624/F0C7FF?text=Service+Booking',
+      'https://placehold.co/900x560/15111f/C93CFF?text=Mechanic+Profile',
+    ],
     orientation: 'desktop',
     github: 'https://github.com/SabbirHossainEvan/car-doctor',
   },
@@ -77,8 +90,11 @@ const projects: Project[] = [
     description:
       'A fintech and digital payments platform providing secure money transfers, bill payments, and financial management tools with a focus on mobile-first user experience.',
     tags: ['JavaScript', 'React', 'Fintech'],
-    image:
+    images: [
       'https://placehold.co/900x560/101624/F0C7FF?text=KomTaka.com',
+      'https://placehold.co/900x560/111827/C93CFF?text=Wallet',
+      'https://placehold.co/900x560/15111f/60A5FA?text=Transactions',
+    ],
     orientation: 'desktop',
     github: 'https://github.com/SabbirHossainEvan/KomTaka.com',
   },
@@ -88,8 +104,11 @@ const projects: Project[] = [
     description:
       'An AI-powered Korean beauty and skincare recommendation app. Features personalized product suggestions, skin analysis, and an interactive beauty routine builder.',
     tags: ['TypeScript', 'React Native', 'AI Integration'],
-    image:
+    images: [
       'https://placehold.co/520x900/111827/C93CFF?text=Korean+Vision',
+      'https://placehold.co/520x900/171022/F0C7FF?text=Skin+Analysis',
+      'https://placehold.co/520x900/101624/34D399?text=Routine+Builder',
+    ],
     orientation: 'mobile',
     github: 'https://github.com/SabbirHossainEvan/korean_vision',
   },
@@ -97,6 +116,8 @@ const projects: Project[] = [
 
 export default function ProjectsPage() {
   const [activeCategory, setActiveCategory] = useState<ProjectCategory>('All')
+  const [activeProjectIndex, setActiveProjectIndex] = useState<number | null>(null)
+  const [activeImageIndex, setActiveImageIndex] = useState(0)
 
   const visibleProjects = useMemo(() => {
     if (activeCategory === 'All') {
@@ -105,6 +126,18 @@ export default function ProjectsPage() {
 
     return projects.filter((project) => project.category === activeCategory)
   }, [activeCategory])
+
+  const galleryItems: ProjectGalleryItem[] = projects.map((project) => ({
+    title: project.title,
+    category: project.category,
+    images: project.images,
+    orientation: project.orientation,
+  }))
+
+  const openLightbox = (project: Project) => {
+    setActiveProjectIndex(projects.findIndex((item) => item.title === project.title))
+    setActiveImageIndex(0)
+  }
 
   return (
     <main className="min-h-screen bg-[#0D0D12] text-white">
@@ -173,15 +206,22 @@ export default function ProjectsPage() {
               <div className="relative min-h-[340px] overflow-hidden bg-[#11111a]">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#C93CFF]/10 via-transparent to-[#F0C7FF]/10" />
                 <div className="absolute inset-0 flex items-center justify-center p-8">
-                  <img
-                    src={project.image}
-                    alt={`${project.title} placeholder preview`}
-                    className={`rounded-2xl border border-white/10 object-cover shadow-2xl shadow-black/40 transition duration-500 group-hover:scale-[1.03] ${
-                      project.orientation === 'mobile'
-                        ? 'h-[420px] w-[240px]'
-                        : 'h-auto w-full'
-                    }`}
-                  />
+                  <button
+                    type="button"
+                    onClick={() => openLightbox(project)}
+                    className="cursor-zoom-in"
+                    aria-label={`Open ${project.title} gallery`}
+                  >
+                    <img
+                      src={project.images[0]}
+                      alt={`${project.title} placeholder preview`}
+                      className={`rounded-2xl border border-white/10 object-cover shadow-2xl shadow-black/40 transition duration-500 group-hover:scale-[1.03] ${
+                        project.orientation === 'mobile'
+                          ? 'h-[420px] w-[240px]'
+                          : 'h-auto w-full'
+                      }`}
+                    />
+                  </button>
                 </div>
               </div>
 
@@ -238,6 +278,15 @@ export default function ProjectsPage() {
           ))}
         </motion.div>
       </section>
+
+      <ProjectLightbox
+        items={galleryItems}
+        activeIndex={activeProjectIndex}
+        activeImageIndex={activeImageIndex}
+        onClose={() => setActiveProjectIndex(null)}
+        onProjectChange={setActiveProjectIndex}
+        onImageChange={setActiveImageIndex}
+      />
     </main>
   )
 }

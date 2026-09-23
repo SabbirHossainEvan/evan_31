@@ -3,6 +3,9 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { ExternalLink, Github, Smartphone, Globe } from 'lucide-react'
+import ProjectLightbox, {
+  type ProjectGalleryItem,
+} from '@/components/portfolio/ProjectLightbox'
 
 interface Project {
   title: string
@@ -12,6 +15,8 @@ interface Project {
   github?: string
   gradient: string
   icon: typeof Smartphone
+  images: string[]
+  orientation: 'mobile' | 'desktop'
 }
 
 const projects: Project[] = [
@@ -23,6 +28,12 @@ const projects: Project[] = [
     github: 'https://github.com/SabbirHossainEvan/Shelfil_App_React_Native',
     gradient: 'from-[#5E1B8C]/20 to-[#C93CFF]/20',
     icon: Smartphone,
+    images: [
+      'https://placehold.co/520x900/111827/C93CFF?text=Shelfil+Home',
+      'https://placehold.co/520x900/171022/F0C7FF?text=Book+Details',
+      'https://placehold.co/520x900/101624/60A5FA?text=Reading+List',
+    ],
+    orientation: 'mobile',
   },
   {
     title: 'MediTrust',
@@ -32,6 +43,12 @@ const projects: Project[] = [
     github: 'https://github.com/SabbirHossainEvan/mediTrust',
     gradient: 'from-[#9333EA]/20 to-[#F0C7FF]/20',
     icon: Globe,
+    images: [
+      'https://placehold.co/900x560/101624/F0C7FF?text=MediTrust+Dashboard',
+      'https://placehold.co/900x560/12201b/34D399?text=Appointments',
+      'https://placehold.co/900x560/111827/C93CFF?text=Patient+Records',
+    ],
+    orientation: 'desktop',
   },
   {
     title: 'MovieFlex',
@@ -41,6 +58,12 @@ const projects: Project[] = [
     github: 'https://github.com/SabbirHossainEvan/MovieFlex',
     gradient: 'from-[#F0C7FF]/20 to-[#D946EF]/20',
     icon: Globe,
+    images: [
+      'https://placehold.co/900x560/15111f/C93CFF?text=MovieFlex+Home',
+      'https://placehold.co/900x560/111827/F0C7FF?text=Movie+Details',
+      'https://placehold.co/900x560/101624/D946EF?text=Search+Results',
+    ],
+    orientation: 'desktop',
   },
   {
     title: 'Car Doctor',
@@ -50,6 +73,12 @@ const projects: Project[] = [
     github: 'https://github.com/SabbirHossainEvan/car-doctor',
     gradient: 'from-[#D946EF]/20 to-[#C93CFF]/20',
     icon: Globe,
+    images: [
+      'https://placehold.co/900x560/111827/D946EF?text=Car+Doctor',
+      'https://placehold.co/900x560/101624/F0C7FF?text=Service+Booking',
+      'https://placehold.co/900x560/15111f/C93CFF?text=Mechanic+Profile',
+    ],
+    orientation: 'desktop',
   },
   {
     title: 'KomTaka.com',
@@ -59,6 +88,12 @@ const projects: Project[] = [
     github: 'https://github.com/SabbirHossainEvan/KomTaka.com',
     gradient: 'from-[#5E1B8C]/20 to-[#F0C7FF]/20',
     icon: Smartphone,
+    images: [
+      'https://placehold.co/900x560/101624/F0C7FF?text=KomTaka.com',
+      'https://placehold.co/900x560/111827/C93CFF?text=Wallet',
+      'https://placehold.co/900x560/15111f/60A5FA?text=Transactions',
+    ],
+    orientation: 'desktop',
   },
   {
     title: 'Korean Vision',
@@ -68,6 +103,12 @@ const projects: Project[] = [
     github: 'https://github.com/SabbirHossainEvan/korean_vision',
     gradient: 'from-[#9333EA]/20 to-[#C93CFF]/20',
     icon: Smartphone,
+    images: [
+      'https://placehold.co/520x900/111827/C93CFF?text=Korean+Vision',
+      'https://placehold.co/520x900/171022/F0C7FF?text=Skin+Analysis',
+      'https://placehold.co/520x900/101624/34D399?text=Routine+Builder',
+    ],
+    orientation: 'mobile',
   },
 ]
 
@@ -75,8 +116,21 @@ export default function Projects() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
   const [filter, setFilter] = useState<'all' | 'mobile' | 'web'>('all')
+  const [activeProjectIndex, setActiveProjectIndex] = useState<number | null>(null)
+  const [activeImageIndex, setActiveImageIndex] = useState(0)
 
   const filtered = filter === 'all' ? projects : projects.filter(p => p.category === filter)
+  const galleryItems: ProjectGalleryItem[] = projects.map((project) => ({
+    title: project.title,
+    category: project.category,
+    images: project.images,
+    orientation: project.orientation,
+  }))
+
+  const openLightbox = (project: Project) => {
+    setActiveProjectIndex(projects.findIndex((item) => item.title === project.title))
+    setActiveImageIndex(0)
+  }
 
   return (
     <section id="projects" className="relative py-20 md:py-32 bg-[#0D0D12] overflow-hidden">
@@ -137,8 +191,18 @@ export default function Projects() {
               className="group relative rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#C93CFF]/20 overflow-hidden transition-all duration-300"
             >
               {/* Project gradient header */}
-              <div className={`h-32 md:h-40 bg-gradient-to-br ${project.gradient} relative overflow-hidden`}>
+              <button
+                type="button"
+                onClick={() => openLightbox(project)}
+                className={`h-32 md:h-40 w-full bg-gradient-to-br ${project.gradient} relative overflow-hidden cursor-zoom-in`}
+                aria-label={`Open ${project.title} gallery`}
+              >
                 <div className="absolute inset-0 bg-black/20" />
+                <img
+                  src={project.images[0]}
+                  alt={`${project.title} placeholder preview`}
+                  className="h-full w-full object-cover opacity-60 transition duration-500 group-hover:scale-105 group-hover:opacity-75"
+                />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <motion.div
                     whileHover={{ scale: 1.1, rotate: 5 }}
@@ -157,7 +221,7 @@ export default function Projects() {
                     {project.category}
                   </span>
                 </div>
-              </div>
+              </button>
 
               {/* Content */}
               <div className="p-4 md:p-5">
@@ -229,6 +293,15 @@ export default function Projects() {
             View All Projects
           </motion.a>
         </motion.div>
+
+        <ProjectLightbox
+          items={galleryItems}
+          activeIndex={activeProjectIndex}
+          activeImageIndex={activeImageIndex}
+          onClose={() => setActiveProjectIndex(null)}
+          onProjectChange={setActiveProjectIndex}
+          onImageChange={setActiveImageIndex}
+        />
       </div>
     </section>
   )
