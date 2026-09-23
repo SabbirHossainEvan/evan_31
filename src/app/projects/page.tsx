@@ -10,6 +10,7 @@ import {
   MonitorSmartphone,
   Smartphone,
 } from 'lucide-react'
+import Navbar from '@/components/portfolio/Navbar'
 
 type ProjectCategory =
   | 'All'
@@ -117,19 +118,13 @@ export default function ProjectsPage() {
 
   return (
     <main className="min-h-screen bg-[#0D0D12] text-white">
+      <Navbar />
       <section className="relative overflow-hidden border-b border-white/5">
         <div className="absolute left-1/2 top-0 h-[420px] w-[720px] -translate-x-1/2 rounded-full bg-[#C93CFF]/10 blur-[140px]" />
         <div className="cyber-grid absolute inset-0 opacity-40" />
 
         <div className="relative mx-auto max-w-7xl px-4 pb-12 pt-24 sm:px-6 md:pb-16 md:pt-28 lg:px-8">
-          <nav className="mb-14 flex items-center justify-between gap-4">
-            <Link
-              href="/"
-              className="text-xl font-bold bg-gradient-to-r from-[#5E1B8C] via-[#C93CFF] to-[#F0C7FF] bg-clip-text text-transparent"
-            >
-              &lt;Evan /&gt;
-            </Link>
-
+          <div className="mb-14 flex justify-end">
             <Link
               href="/"
               className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-gray-200 transition hover:border-[#C93CFF]/30 hover:bg-[#C93CFF]/10 hover:text-white"
@@ -137,7 +132,7 @@ export default function ProjectsPage() {
               <ArrowLeft size={16} />
               Back to home
             </Link>
-          </nav>
+          </div>
 
           <motion.div
             initial={{ opacity: 0, y: 24 }}

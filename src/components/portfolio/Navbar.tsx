@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
+import { usePathname, useRouter } from 'next/navigation'
 
 const navLinks = [
   { name: 'Home', href: '#home' },
@@ -14,6 +15,8 @@ const navLinks = [
 ]
 
 export default function Navbar() {
+  const pathname = usePathname()
+  const router = useRouter()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
@@ -41,7 +44,13 @@ export default function Navbar() {
 
   const scrollToSection = (href: string) => {
     if (!href.startsWith('#')) {
-      window.location.href = href
+      router.push(href)
+      setIsMobileMenuOpen(false)
+      return
+    }
+
+    if (pathname !== '/') {
+      router.push(`/${href}`)
       setIsMobileMenuOpen(false)
       return
     }
@@ -88,7 +97,8 @@ export default function Navbar() {
                   href={link.href}
                   onClick={(e) => { e.preventDefault(); scrollToSection(link.href) }}
                   className={`relative px-4 py-2 text-sm font-medium rounded-full transition-colors duration-300 ${
-                    link.href.startsWith('#') && activeSection === link.href.substring(1)
+                    (link.href === '/projects' && pathname === '/projects') ||
+                    (pathname === '/' && link.href.startsWith('#') && activeSection === link.href.substring(1))
                       ? 'text-[#C93CFF]'
                       : 'text-gray-400 hover:text-white'
                   }`}
@@ -96,7 +106,8 @@ export default function Navbar() {
                   whileTap={{ scale: 0.95 }}
                 >
                   {link.name}
-                  {link.href.startsWith('#') && activeSection === link.href.substring(1) && (
+                  {((link.href === '/projects' && pathname === '/projects') ||
+                    (pathname === '/' && link.href.startsWith('#') && activeSection === link.href.substring(1))) && (
                     <motion.span
                       layoutId="activeNav"
                       className="absolute inset-0 rounded-full bg-[#C93CFF]/10 border border-[#C93CFF]/20 shadow-[0_0_20px_rgba(201,61,255,0.3)]"
@@ -148,7 +159,8 @@ export default function Navbar() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.05 }}
                     className={`px-4 py-3 rounded-xl text-base font-medium transition-colors ${
-                      link.href.startsWith('#') && activeSection === link.href.substring(1)
+                      (link.href === '/projects' && pathname === '/projects') ||
+                      (pathname === '/' && link.href.startsWith('#') && activeSection === link.href.substring(1))
                         ? 'text-[#C93CFF] bg-[#C93CFF]/10 shadow-[0_0_15px_rgba(201,61,255,0.2)]'
                         : 'text-gray-300 hover:text-white hover:bg-white/5'
                     }`}
