@@ -8,7 +8,7 @@ const navLinks = [
   { name: 'Home', href: '#home' },
   { name: 'About', href: '#about' },
   { name: 'Skills', href: '#skills' },
-  { name: 'Projects', href: '#projects' },
+  { name: 'Projects', href: '/projects' },
   { name: 'Experience', href: '#experience' },
   { name: 'Contact', href: '#contact' },
 ]
@@ -40,6 +40,12 @@ export default function Navbar() {
   }, [])
 
   const scrollToSection = (href: string) => {
+    if (!href.startsWith('#')) {
+      window.location.href = href
+      setIsMobileMenuOpen(false)
+      return
+    }
+
     const id = href.substring(1)
     const element = document.getElementById(id)
     if (element) {
@@ -82,7 +88,7 @@ export default function Navbar() {
                   href={link.href}
                   onClick={(e) => { e.preventDefault(); scrollToSection(link.href) }}
                   className={`relative px-4 py-2 text-sm font-medium rounded-full transition-colors duration-300 ${
-                    activeSection === link.href.substring(1)
+                    link.href.startsWith('#') && activeSection === link.href.substring(1)
                       ? 'text-[#C93CFF]'
                       : 'text-gray-400 hover:text-white'
                   }`}
@@ -90,7 +96,7 @@ export default function Navbar() {
                   whileTap={{ scale: 0.95 }}
                 >
                   {link.name}
-                  {activeSection === link.href.substring(1) && (
+                  {link.href.startsWith('#') && activeSection === link.href.substring(1) && (
                     <motion.span
                       layoutId="activeNav"
                       className="absolute inset-0 rounded-full bg-[#C93CFF]/10 border border-[#C93CFF]/20 shadow-[0_0_20px_rgba(201,61,255,0.3)]"
@@ -142,7 +148,7 @@ export default function Navbar() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.05 }}
                     className={`px-4 py-3 rounded-xl text-base font-medium transition-colors ${
-                      activeSection === link.href.substring(1)
+                      link.href.startsWith('#') && activeSection === link.href.substring(1)
                         ? 'text-[#C93CFF] bg-[#C93CFF]/10 shadow-[0_0_15px_rgba(201,61,255,0.2)]'
                         : 'text-gray-300 hover:text-white hover:bg-white/5'
                     }`}

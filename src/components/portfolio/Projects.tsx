@@ -220,15 +220,13 @@ export default function Projects() {
           className="text-center mt-10 md:mt-14"
         >
           <motion.a
-            href="https://github.com/SabbirHossainEvan"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/projects"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/5 border border-white/10 text-gray-300 text-sm font-medium hover:bg-white/10 hover:border-white/20 transition-all"
           >
             <Github size={18} />
-            View All Repositories
+            View All Projects
           </motion.a>
         </motion.div>
       </div>
