@@ -12,15 +12,7 @@ import {
 } from 'lucide-react'
 import Navbar from '@/components/portfolio/Navbar'
 
-type ProjectCategory =
-  | 'All'
-  | 'React Native'
-  | 'Flutter'
-  | 'Swift'
-  | 'Kotlin'
-  | 'Java'
-  | 'Spring Boot'
-  | 'NextJS'
+type ProjectCategory = 'All' | 'Mobile' | 'Web'
 
 interface Project {
   title: string
@@ -29,79 +21,77 @@ interface Project {
   tags: string[]
   image: string
   orientation: 'mobile' | 'desktop'
+  github: string
 }
 
-const categories: ProjectCategory[] = [
-  'All',
-  'React Native',
-  'Flutter',
-  'Swift',
-  'Kotlin',
-  'Java',
-  'Spring Boot',
-  'NextJS',
-]
+const categories: ProjectCategory[] = ['All', 'Mobile', 'Web']
 
 const projects: Project[] = [
   {
-    title: 'DineWave App',
-    category: 'React Native',
+    title: 'Shelfil App',
+    category: 'Mobile',
     description:
-      'A polished food ordering experience with onboarding, location-aware browsing, cart management, checkout, saved restaurants, and order history for returning users.',
-    tags: ['React Native', 'Expo', 'Zustand', 'Stripe', 'Jest'],
+      'A modern book discovery and reading management mobile app built with React Native. Features personalized recommendations, reading progress tracking, and social sharing capabilities.',
+    tags: ['React Native', 'JavaScript', 'Mobile UI'],
     image:
-      'https://placehold.co/520x900/111827/C93CFF?text=Mobile+App+Preview',
+      'https://placehold.co/520x900/111827/C93CFF?text=Shelfil+App',
     orientation: 'mobile',
+    github: 'https://github.com/SabbirHossainEvan/Shelfil_App_React_Native',
   },
   {
-    title: 'VibeStream',
-    category: 'Kotlin',
+    title: 'MediTrust',
+    category: 'Web',
     description:
-      'An offline-first music app concept with playlist management, local file importing, metadata extraction, and a dark interface designed for focused listening.',
-    tags: ['Kotlin', 'MVVM', 'Jetpack Compose', 'Material 3', 'SQLite'],
+      'A healthcare and telemedicine web application providing secure patient-doctor communication, appointment scheduling, and medical records management with an intuitive interface.',
+    tags: ['JavaScript', 'React', 'REST APIs'],
     image:
-      'https://placehold.co/520x900/08080c/F0C7FF?text=Android+UI+Preview',
-    orientation: 'mobile',
-  },
-  {
-    title: 'TaskPilot Dashboard',
-    category: 'NextJS',
-    description:
-      'A web dashboard for teams to plan work, assign tasks, track delivery status, and review activity across projects with clear operational views.',
-    tags: ['NextJS', 'TypeScript', 'Tailwind', 'Prisma', 'Charts'],
-    image:
-      'https://placehold.co/900x560/101624/60A5FA?text=Dashboard+Preview',
+      'https://placehold.co/900x560/101624/F0C7FF?text=MediTrust',
     orientation: 'desktop',
+    github: 'https://github.com/SabbirHossainEvan/mediTrust',
   },
   {
-    title: 'HealthBridge',
-    category: 'Flutter',
+    title: 'MovieFlex',
+    category: 'Web',
     description:
-      'A telemedicine prototype with appointment booking, secure patient profiles, doctor search, consultation notes, and a clean mobile-first care journey.',
-    tags: ['Flutter', 'Dart', 'Firebase', 'Provider', 'REST API'],
+      'A sleek movie discovery and streaming platform with real-time search, trending recommendations, and detailed movie information. Built with TypeScript and modern React patterns.',
+    tags: ['TypeScript', 'React', 'API Integration'],
     image:
-      'https://placehold.co/520x900/12201b/34D399?text=Healthcare+App',
-    orientation: 'mobile',
-  },
-  {
-    title: 'ChatForge',
-    category: 'Spring Boot',
-    description:
-      'A real-time messaging backend and interface demo with WebSocket events, user presence, room management, message history, and typing states.',
-    tags: ['Spring Boot', 'WebSocket', 'PostgreSQL', 'JWT', 'Docker'],
-    image:
-      'https://placehold.co/900x560/15111f/A78BFA?text=Chat+System',
+      'https://placehold.co/900x560/15111f/C93CFF?text=MovieFlex',
     orientation: 'desktop',
+    github: 'https://github.com/SabbirHossainEvan/MovieFlex',
   },
   {
-    title: 'PocketBudget',
-    category: 'Swift',
+    title: 'Car Doctor',
+    category: 'Web',
     description:
-      'A personal finance app structure for iOS featuring budget categories, quick expense entry, recurring transactions, and monthly spending insights.',
-    tags: ['Swift', 'SwiftUI', 'CoreData', 'Charts', 'iOS'],
+      'An automotive service booking platform that connects car owners with nearby mechanics. Features real-time tracking, service history, and secure payment integration.',
+    tags: ['JavaScript', 'React', 'Node.js'],
     image:
-      'https://placehold.co/520x900/111827/FBBF24?text=iOS+Preview',
+      'https://placehold.co/900x560/111827/D946EF?text=Car+Doctor',
+    orientation: 'desktop',
+    github: 'https://github.com/SabbirHossainEvan/car-doctor',
+  },
+  {
+    title: 'KomTaka.com',
+    category: 'Web',
+    description:
+      'A fintech and digital payments platform providing secure money transfers, bill payments, and financial management tools with a focus on mobile-first user experience.',
+    tags: ['JavaScript', 'React', 'Fintech'],
+    image:
+      'https://placehold.co/900x560/101624/F0C7FF?text=KomTaka.com',
+    orientation: 'desktop',
+    github: 'https://github.com/SabbirHossainEvan/KomTaka.com',
+  },
+  {
+    title: 'Korean Vision',
+    category: 'Mobile',
+    description:
+      'An AI-powered Korean beauty and skincare recommendation app. Features personalized product suggestions, skin analysis, and an interactive beauty routine builder.',
+    tags: ['TypeScript', 'React Native', 'AI Integration'],
+    image:
+      'https://placehold.co/520x900/111827/C93CFF?text=Korean+Vision',
     orientation: 'mobile',
+    github: 'https://github.com/SabbirHossainEvan/korean_vision',
   },
 ]
 
@@ -225,7 +215,7 @@ export default function ProjectsPage() {
 
                 <div className="mt-auto flex flex-wrap gap-3 pt-7">
                   <a
-                    href="https://github.com/"
+                    href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-gray-200 transition hover:border-[#C93CFF]/30 hover:text-white"
@@ -234,7 +224,7 @@ export default function ProjectsPage() {
                     Code
                   </a>
                   <a
-                    href="https://example.com/"
+                    href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 rounded-xl border border-[#C93CFF]/25 bg-[#C93CFF]/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#C93CFF]/20"
