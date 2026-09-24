@@ -67,7 +67,7 @@ export default function Experience() {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-    <section id="experience" className="relative py-20 md:py-32 bg-[#0D0D12] overflow-hidden">
+    <section id="experience" className="relative py-2 md:py-2 bg-[#0D0D12] overflow-hidden">
       {/* Background */}
       <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-purple-500/5 blur-[150px] rounded-full" />
 

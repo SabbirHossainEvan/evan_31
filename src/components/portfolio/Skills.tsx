@@ -115,7 +115,7 @@ export default function Skills() {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-    <section id="skills" className="relative overflow-hidden bg-[#0d0d12] py-28 md:py-0">
+    <section id="skills" className="relative overflow-hidden bg-[#0d0d12] py-2 md:py-0">
       <div className="absolute left-1/2  -translate-x-1/2 rounded-full bg-purple-600/[0.035] blur-[140px]" />
 
       <div ref={ref} className="relative mx-auto max-w-[1250px] px-4 sm:px-8 lg:px-12">
