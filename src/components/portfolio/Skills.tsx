@@ -181,7 +181,7 @@ export default function Skills() {
               </p>
             </div>
 
-            <div className="flex min-w-0 flex-col gap-5 sm:flex-row">
+            {/* <div className="flex min-w-0 flex-col gap-5 sm:flex-row">
               <ChartFrame label="LeetCode" value="300+ Problems Solved">
                 <div className="flex h-[145px] items-end gap-2 border-b border-l border-white/10 px-2 pb-1.5">
                   {leetCodeBars.map((height, index) => (
@@ -209,7 +209,7 @@ export default function Skills() {
                   </svg>
                 </div>
               </ChartFrame>
-            </div>
+            </div> */}
           </div>
 
           <div className="mt-6 grid gap-4 sm:grid-cols-3">
