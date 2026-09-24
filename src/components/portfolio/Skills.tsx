@@ -75,17 +75,23 @@ const technologyGroups: TechnologyGroup[] = [
 const leetCodeBars = [24, 38, 30, 52, 66, 49, 72, 60, 86, 100]
 const codeforcesPoints = [16, 22, 20, 31, 28, 42, 39, 50, 47, 63, 58, 72, 68, 82, 94]
 
-function TechRow({ technology }: { technology: Technology }) {
+function TechRow({ technology, delay = 0 }: { technology: Technology; delay?: number }) {
   const Icon = technology.icon
 
   return (
-    <div className="flex min-w-0 items-center gap-3 text-sm text-slate-200 sm:text-base">
+    <motion.div
+      initial={{ opacity: 0, x: -12 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.35, delay }}
+      whileHover={{ x: 6 }}
+      className="flex min-w-0 items-center gap-3 text-sm text-slate-200 sm:text-base"
+    >
       <Icon className={`h-5 w-5 shrink-0 ${technology.accent ?? 'text-purple-300'}`} strokeWidth={2.3} />
       <span className="min-w-0 flex-1 truncate">{technology.name}</span>
       <span className="shrink-0 rounded bg-black/40 px-2.5 py-1.5 text-[11px] font-medium text-slate-300 sm:text-xs">
         {technology.status}
       </span>
-    </div>
+    </motion.div>
   )
 }
 
@@ -139,16 +145,22 @@ export default function Skills() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: index * 0.12 }}
+                whileHover={{ y: -8, scale: 1.015, boxShadow: '0 18px 45px rgba(183, 61, 230, 0.2)' }}
+                whileTap={{ scale: 0.99 }}
                 className="relative min-h-[290px] overflow-hidden rounded-xl border border-[#9e43c7]/70 bg-[linear-gradient(145deg,rgba(57,25,70,0.74),rgba(18,16,25,0.9)_62%)] px-6 py-6 shadow-[0_10px_35px_rgba(155,43,196,0.09)]"
               >
-                <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-[#d77cff] to-transparent opacity-70" />
+                <motion.div
+                  animate={{ opacity: [0.35, 0.9, 0.35] }}
+                  transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut', delay: index * 0.35 }}
+                  className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-[#d77cff] to-transparent"
+                />
                 <div className="mb-5 flex items-start gap-3">
                   <GroupIcon className="mt-0.5 h-6 w-6 shrink-0 text-[#d2a0e8]" strokeWidth={1.8} />
                   <h3 className="max-w-[250px] text-base font-bold leading-[1.2] text-white sm:text-lg">{group.title}</h3>
                 </div>
                 <div className="space-y-3">
-                  {group.technologies.map((technology) => (
-                    <TechRow key={technology.name} technology={technology} />
+                  {group.technologies.map((technology, technologyIndex) => (
+                    <TechRow key={technology.name} technology={technology} delay={0.2 + index * 0.12 + technologyIndex * 0.06} />
                   ))}
                 </div>
                 {group.footer && (
@@ -166,6 +178,7 @@ export default function Skills() {
           initial={{ opacity: 0, y: 24 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.4 }}
+          whileHover={{ y: -5, boxShadow: '0 20px 55px rgba(124, 42, 160, 0.2)' }}
           className="mt-8 overflow-hidden rounded-xl border border-white/[0.07] bg-[linear-gradient(135deg,rgba(44,22,54,0.7),rgba(17,16,23,0.92)_55%)] p-6 shadow-[0_14px_45px_rgba(0,0,0,0.18)] sm:p-8"
         >
           <div className="grid gap-8 lg:grid-cols-[0.95fr_1.25fr]">
@@ -213,19 +226,19 @@ export default function Skills() {
           </div>
 
           <div className="mt-6 grid gap-4 sm:grid-cols-3">
-            <div className="rounded-xl border border-white/[0.06] bg-[#111017]/80 p-5">
+            <motion.div whileHover={{ y: -4, borderColor: 'rgba(201, 60, 255, 0.28)' }} className="rounded-xl border border-white/[0.06] bg-[#111017]/80 p-5">
               <div className="flex items-center gap-2.5 text-xs font-semibold text-white"><Trophy className="h-5 w-5 text-purple-300" /> Competitive Programming</div>
               <div className="mt-4 flex items-end gap-8"><strong className="text-lg text-[#d99aff]">High Rank</strong><strong className="text-lg text-[#d99aff]">300+</strong></div>
               <div className="mt-1.5 flex gap-12 text-[11px] text-slate-500"><span>Global Rank</span><span>Contest Rating</span></div>
-            </div>
-            <div className="rounded-xl border border-white/[0.06] bg-[#111017]/80 p-5">
+            </motion.div>
+            <motion.div whileHover={{ y: -4, borderColor: 'rgba(201, 60, 255, 0.28)' }} className="rounded-xl border border-white/[0.06] bg-[#111017]/80 p-5">
               <div className="flex items-center gap-2.5 text-xs font-semibold text-white"><Braces className="h-5 w-5 text-purple-300" /> DSA &amp; Algorithmic Patterns</div>
               <div className="mt-5 flex flex-wrap gap-2"><span className="stat-pill">Categories</span><span className="stat-pill">Categories</span><span className="stat-pill">Patterns</span></div>
-            </div>
-            <div className="rounded-xl border border-white/[0.06] bg-[#111017]/80 p-5">
+            </motion.div>
+            <motion.div whileHover={{ y: -4, borderColor: 'rgba(201, 60, 255, 0.28)' }} className="rounded-xl border border-white/[0.06] bg-[#111017]/80 p-5">
               <div className="flex items-center gap-2.5 text-xs font-semibold text-white"><Settings2 className="h-5 w-5 text-purple-300" /> System Design &amp; Optimization</div>
               <div className="mt-5 flex flex-wrap gap-2"><span className="stat-pill">Concepts</span><span className="stat-pill">Concepts</span><span className="stat-pill">Content &amp; Toastion</span></div>
-            </div>
+            </motion.div>
           </div>
         </motion.article>
       </div>
