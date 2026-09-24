@@ -79,10 +79,10 @@ function TechRow({ technology }: { technology: Technology }) {
   const Icon = technology.icon
 
   return (
-    <div className="flex min-w-0 items-center gap-2 text-[10px] text-slate-200 sm:text-[11px]">
-      <Icon className={`h-3.5 w-3.5 shrink-0 ${technology.accent ?? 'text-purple-300'}`} strokeWidth={2.3} />
+    <div className="flex min-w-0 items-center gap-3 text-sm text-slate-200 sm:text-base">
+      <Icon className={`h-5 w-5 shrink-0 ${technology.accent ?? 'text-purple-300'}`} strokeWidth={2.3} />
       <span className="min-w-0 flex-1 truncate">{technology.name}</span>
-      <span className="shrink-0 rounded bg-black/40 px-1.5 py-0.5 text-[8px] font-medium text-slate-300 sm:text-[9px]">
+      <span className="shrink-0 rounded bg-black/40 px-2.5 py-1.5 text-[11px] font-medium text-slate-300 sm:text-xs">
         {technology.status}
       </span>
     </div>
@@ -91,10 +91,10 @@ function TechRow({ technology }: { technology: Technology }) {
 
 function ChartFrame({ children, label, value }: { children: React.ReactNode; label: string; value: string }) {
   return (
-    <div className="min-w-0 flex-1 rounded-lg border border-white/[0.06] bg-[#101016]/75 p-2.5">
-      <div className="mb-2 flex items-center justify-between gap-2 text-[9px] text-slate-400">
-        <span className="flex items-center gap-1.5 font-semibold text-slate-200">
-          <ChartNoAxesCombined className="h-3 w-3 text-purple-300" />
+    <div className="min-w-0 flex-1 rounded-xl border border-white/[0.06] bg-[#101016]/75 p-4">
+      <div className="mb-3.5 flex items-center justify-between gap-2 text-xs text-slate-400 sm:text-sm">
+        <span className="flex items-center gap-2.5 font-semibold text-slate-200">
+          <ChartNoAxesCombined className="h-5 w-5 text-purple-300" />
           {label}
         </span>
         <span className="truncate">{value}</span>
@@ -109,27 +109,27 @@ export default function Skills() {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-    <section id="skills" className="relative overflow-hidden bg-[#0d0d12] py-20 md:py-8">
+    <section id="skills" className="relative overflow-hidden bg-[#0d0d12] py-28 md:py-0">
       <div className="absolute left-1/2  -translate-x-1/2 rounded-full bg-purple-600/[0.035] blur-[140px]" />
 
-      <div ref={ref} className="relative mx-auto px-4 sm:px-40">
+      <div ref={ref} className="relative mx-auto max-w-[1250px] px-4 sm:px-8 lg:px-12">
         <motion.div
           initial={{ opacity: 0, y: 22 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="mb-9 text-center md:mb-10"
+          className="mb-14 text-center md:mb-16"
         >
-          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-6xl">
+          <h2 className="text-4xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
             Technologies I <span className="text-[#c93cff]">| Master</span>
           </h2>
-          <p className="mx-auto mt-3 max-w-xl text-[10px] leading-relaxed text-slate-400 sm:text-xs">
+          <p className="mx-auto mt-5 max-w-3xl text-sm leading-relaxed text-slate-400 sm:text-base">
             Specializing in mobile-first development with a strong foundation in modern web technologies.
             <br />
             Here are the tools and frameworks I work with daily.
           </p>
         </motion.div>
 
-        <div className="grid gap-3.5 md:grid-cols-[1.08fr_1.08fr_0.92fr]">
+        <div className="grid gap-6 md:grid-cols-[1.08fr_1.08fr_0.92fr]">
           {technologyGroups.map((group, index) => {
             const GroupIcon = group.icon
 
@@ -139,21 +139,21 @@ export default function Skills() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: index * 0.12 }}
-                className="relative overflow-hidden rounded-lg border border-[#9e43c7]/70 bg-[linear-gradient(145deg,rgba(57,25,70,0.74),rgba(18,16,25,0.9)_62%)] px-3 py-3.5 shadow-[0_10px_35px_rgba(155,43,196,0.09)]"
+                className="relative min-h-[290px] overflow-hidden rounded-xl border border-[#9e43c7]/70 bg-[linear-gradient(145deg,rgba(57,25,70,0.74),rgba(18,16,25,0.9)_62%)] px-6 py-6 shadow-[0_10px_35px_rgba(155,43,196,0.09)]"
               >
                 <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-[#d77cff] to-transparent opacity-70" />
-                <div className="mb-2.5 flex items-start gap-2">
-                  <GroupIcon className="mt-0.5 h-4 w-4 shrink-0 text-[#d2a0e8]" strokeWidth={1.8} />
-                  <h3 className="max-w-[180px] text-[11px] font-bold leading-[1.15] text-white sm:text-xs">{group.title}</h3>
+                <div className="mb-5 flex items-start gap-3">
+                  <GroupIcon className="mt-0.5 h-6 w-6 shrink-0 text-[#d2a0e8]" strokeWidth={1.8} />
+                  <h3 className="max-w-[250px] text-base font-bold leading-[1.2] text-white sm:text-lg">{group.title}</h3>
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-3">
                   {group.technologies.map((technology) => (
                     <TechRow key={technology.name} technology={technology} />
                   ))}
                 </div>
                 {group.footer && (
-                  <div className="mt-2.5 inline-flex items-center gap-1 rounded-full border border-purple-300/15 bg-black/20 px-2 py-0.5 text-[8px] text-slate-500">
-                    <Check className="h-2.5 w-2.5 text-purple-300" />
+                  <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-purple-300/15 bg-black/20 px-3 py-1.5 text-xs text-slate-500">
+                    <Check className="h-4 w-4 text-purple-300" />
                     {group.footer}
                   </div>
                 )}
@@ -166,24 +166,24 @@ export default function Skills() {
           initial={{ opacity: 0, y: 24 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-5 overflow-hidden rounded-lg border border-white/[0.07] bg-[linear-gradient(135deg,rgba(44,22,54,0.7),rgba(17,16,23,0.92)_55%)] p-3.5 shadow-[0_14px_45px_rgba(0,0,0,0.18)] sm:p-4"
+          className="mt-8 overflow-hidden rounded-xl border border-white/[0.07] bg-[linear-gradient(135deg,rgba(44,22,54,0.7),rgba(17,16,23,0.92)_55%)] p-6 shadow-[0_14px_45px_rgba(0,0,0,0.18)] sm:p-8"
         >
-          <div className="grid gap-4 lg:grid-cols-[0.95fr_1.25fr]">
+          <div className="grid gap-8 lg:grid-cols-[0.95fr_1.25fr]">
             <div className="min-w-0">
-              <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-purple-500/10 px-2 py-1 text-[8px] font-semibold uppercase tracking-[0.08em] text-purple-200">
-                <Trophy className="h-3 w-3" />
+              <div className="mb-4 inline-flex items-center gap-2.5 rounded-full bg-purple-500/10 px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-purple-200">
+                <Trophy className="h-5 w-5" />
                 Competitive Programming
               </div>
-              <h3 className="text-lg font-bold text-white sm:text-xl">Problem Solving Ability</h3>
-              <p className="mt-2 max-w-[280px] text-[9px] leading-relaxed text-slate-400 sm:text-[10px]">
+              <h3 className="text-2xl font-bold text-white sm:text-3xl">Problem Solving Ability</h3>
+              <p className="mt-4 max-w-[420px] text-xs leading-relaxed text-slate-400 sm:text-sm">
                 I approach coding challenges by reading constraints carefully, building the simplest correct idea first,
                 then optimizing it with strong data structures and algorithmic patterns.
               </p>
             </div>
 
-            <div className="flex min-w-0 flex-col gap-3 sm:flex-row">
+            <div className="flex min-w-0 flex-col gap-5 sm:flex-row">
               <ChartFrame label="LeetCode" value="300+ Problems Solved">
-                <div className="flex h-[76px] items-end gap-1 border-b border-l border-white/10 px-1 pb-1">
+                <div className="flex h-[145px] items-end gap-2 border-b border-l border-white/10 px-2 pb-1.5">
                   {leetCodeBars.map((height, index) => (
                     <motion.div
                       key={index}
@@ -196,7 +196,7 @@ export default function Skills() {
                 </div>
               </ChartFrame>
               <ChartFrame label="CODEFORCES" value="Rating">
-                <div className="relative h-[76px] overflow-hidden border-b border-l border-white/10">
+                <div className="relative h-[145px] overflow-hidden border-b border-l border-white/10">
                   <svg viewBox="0 0 180 76" className="absolute inset-0 h-full w-full" preserveAspectRatio="none" aria-label="Codeforces rating trend">
                     <defs>
                       <linearGradient id="ratingFill" x1="0" x2="0" y1="0" y2="1">
@@ -212,19 +212,19 @@ export default function Skills() {
             </div>
           </div>
 
-          <div className="mt-3 grid gap-2 sm:grid-cols-3">
-            <div className="rounded-lg border border-white/[0.06] bg-[#111017]/80 p-2.5">
-              <div className="flex items-center gap-1.5 text-[9px] font-semibold text-white"><Trophy className="h-3 w-3 text-purple-300" /> Competitive Programming</div>
-              <div className="mt-2 flex items-end gap-5"><strong className="text-sm text-[#d99aff]">High Rank</strong><strong className="text-sm text-[#d99aff]">300+</strong></div>
-              <div className="mt-0.5 flex gap-8 text-[8px] text-slate-500"><span>Global Rank</span><span>Contest Rating</span></div>
+          <div className="mt-6 grid gap-4 sm:grid-cols-3">
+            <div className="rounded-xl border border-white/[0.06] bg-[#111017]/80 p-5">
+              <div className="flex items-center gap-2.5 text-xs font-semibold text-white"><Trophy className="h-5 w-5 text-purple-300" /> Competitive Programming</div>
+              <div className="mt-4 flex items-end gap-8"><strong className="text-lg text-[#d99aff]">High Rank</strong><strong className="text-lg text-[#d99aff]">300+</strong></div>
+              <div className="mt-1.5 flex gap-12 text-[11px] text-slate-500"><span>Global Rank</span><span>Contest Rating</span></div>
             </div>
-            <div className="rounded-lg border border-white/[0.06] bg-[#111017]/80 p-2.5">
-              <div className="flex items-center gap-1.5 text-[9px] font-semibold text-white"><Braces className="h-3 w-3 text-purple-300" /> DSA &amp; Algorithmic Patterns</div>
-              <div className="mt-3 flex flex-wrap gap-1"><span className="stat-pill">Categories</span><span className="stat-pill">Categories</span><span className="stat-pill">Patterns</span></div>
+            <div className="rounded-xl border border-white/[0.06] bg-[#111017]/80 p-5">
+              <div className="flex items-center gap-2.5 text-xs font-semibold text-white"><Braces className="h-5 w-5 text-purple-300" /> DSA &amp; Algorithmic Patterns</div>
+              <div className="mt-5 flex flex-wrap gap-2"><span className="stat-pill">Categories</span><span className="stat-pill">Categories</span><span className="stat-pill">Patterns</span></div>
             </div>
-            <div className="rounded-lg border border-white/[0.06] bg-[#111017]/80 p-2.5">
-              <div className="flex items-center gap-1.5 text-[9px] font-semibold text-white"><Settings2 className="h-3 w-3 text-purple-300" /> System Design &amp; Optimization</div>
-              <div className="mt-3 flex flex-wrap gap-1"><span className="stat-pill">Concepts</span><span className="stat-pill">Concepts</span><span className="stat-pill">Content &amp; Toastion</span></div>
+            <div className="rounded-xl border border-white/[0.06] bg-[#111017]/80 p-5">
+              <div className="flex items-center gap-2.5 text-xs font-semibold text-white"><Settings2 className="h-5 w-5 text-purple-300" /> System Design &amp; Optimization</div>
+              <div className="mt-5 flex flex-wrap gap-2"><span className="stat-pill">Concepts</span><span className="stat-pill">Concepts</span><span className="stat-pill">Content &amp; Toastion</span></div>
             </div>
           </div>
         </motion.article>
@@ -236,8 +236,8 @@ export default function Skills() {
           border-radius: 4px;
           background: rgba(255, 255, 255, 0.04);
           color: rgb(203 213 225);
-          font-size: 8px;
-          padding: 3px 6px;
+          font-size: 11px;
+          padding: 5px 10px;
         }
       `}</style>
     </section>
