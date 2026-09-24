@@ -23,7 +23,6 @@ interface ProjectLightboxProps {
   activeIndex: number | null
   activeImageIndex: number
   onClose: () => void
-  onProjectChange: (index: number) => void
   onImageChange: (index: number) => void
 }
 
@@ -32,7 +31,6 @@ export default function ProjectLightbox({
   activeIndex,
   activeImageIndex,
   onClose,
-  onProjectChange,
   onImageChange,
 }: ProjectLightboxProps) {
   const [zoom, setZoom] = useState(1)
@@ -40,19 +38,6 @@ export default function ProjectLightbox({
   const project = activeIndex === null ? null : items[activeIndex]
   const images = project?.images ?? []
   const image = images[activeImageIndex] ?? images[0]
-
-  const goToProject = (direction: 'previous' | 'next') => {
-    if (activeIndex === null) return
-
-    const nextIndex =
-      direction === 'next'
-        ? (activeIndex + 1) % items.length
-        : (activeIndex - 1 + items.length) % items.length
-
-    setZoom(1)
-    onProjectChange(nextIndex)
-    onImageChange(0)
-  }
 
   const goToImage = (direction: 'previous' | 'next') => {
     if (!images.length) return
@@ -75,11 +60,11 @@ export default function ProjectLightbox({
       }
 
       if (event.key === 'ArrowRight') {
-        images.length > 1 ? goToImage('next') : goToProject('next')
+        goToImage('next')
       }
 
       if (event.key === 'ArrowLeft') {
-        images.length > 1 ? goToImage('previous') : goToProject('previous')
+        goToImage('previous')
       }
     }
 
@@ -117,7 +102,7 @@ export default function ProjectLightbox({
 
           <div className="absolute right-4 top-5 z-10 flex items-center gap-3 sm:right-8 md:right-12 lg:right-20">
             <span className="rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-medium text-gray-200">
-              {activeIndex + 1} / {items.length}
+              {activeImageIndex + 1} / {images.length}
             </span>
             <button
               type="button"
@@ -131,18 +116,18 @@ export default function ProjectLightbox({
 
           <button
             type="button"
-            onClick={() => goToProject('previous')}
+            onClick={() => goToImage('previous')}
             className="absolute left-4 top-1/2 z-10 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-white/5 text-white transition hover:bg-white/10 md:left-8"
-            aria-label="Previous project"
+            aria-label="Previous image"
           >
             <ChevronLeft size={28} />
           </button>
 
           <button
             type="button"
-            onClick={() => goToProject('next')}
+            onClick={() => goToImage('next')}
             className="absolute right-4 top-1/2 z-10 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-white/5 text-white transition hover:bg-white/10 md:right-8"
-            aria-label="Next project"
+            aria-label="Next image"
           >
             <ChevronRight size={28} />
           </button>

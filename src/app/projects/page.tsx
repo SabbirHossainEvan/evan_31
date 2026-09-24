@@ -284,7 +284,6 @@ export default function ProjectsPage() {
         activeIndex={activeProjectIndex}
         activeImageIndex={activeImageIndex}
         onClose={() => setActiveProjectIndex(null)}
-        onProjectChange={setActiveProjectIndex}
         onImageChange={setActiveImageIndex}
       />
     </main>

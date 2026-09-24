@@ -299,7 +299,6 @@ export default function Projects() {
           activeIndex={activeProjectIndex}
           activeImageIndex={activeImageIndex}
           onClose={() => setActiveProjectIndex(null)}
-          onProjectChange={setActiveProjectIndex}
           onImageChange={setActiveImageIndex}
         />
       </div>
