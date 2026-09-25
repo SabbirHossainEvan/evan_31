@@ -122,6 +122,66 @@ const projects: Project[] = [
     github: 'https://github.com/SabbirHossainEvan/DirectReinigen-Dashboard',
     liveDemo: 'https://direct-reinigen-dashboard.vercel.app/auth/sign-in',
   },
+  {
+    title: 'London Essex',
+    category: 'Web',
+    description:
+      'A modern, responsive business website designed for London & Essex service operations. Features sleek visual layouts, service showcases, contact inquiries, and interactive UI components optimized for desktop and mobile users.',
+    tags: ['TypeScript', 'Next.js', 'Tailwind CSS', 'Prisma', 'MongoDB', 'Node.js'],
+    images: [
+      'https://placehold.co/520x900/111827/C93CFF?text=Korean+Vision',
+      'https://placehold.co/520x900/171022/F0C7FF?text=Skin+Analysis',
+      'https://placehold.co/520x900/101624/34D399?text=Routine+Builder',
+    ],
+    orientation: 'desktop',
+    github: 'https://github.com/SabbirHossainEvan/london_essex',
+    liveDemo: 'https://london-essex.vercel.app/',
+  },
+  {
+    title: 'London Essex Dashboard',
+    category: 'Web',
+    description:
+      'An intuitive administrative management dashboard for London Essex operations. Features real-time analytics, user and service management, data visualization, and role-based access control built for seamless workflow optimization.',
+    tags: ['TypeScript', 'Next.js', 'Tailwind CSS', 'Prisma', 'MongoDB', 'Node.js'],
+    images: [
+      'https://placehold.co/520x900/111827/C93CFF?text=Korean+Vision',
+      'https://placehold.co/520x900/171022/F0C7FF?text=Skin+Analysis',
+      'https://placehold.co/520x900/101624/34D399?text=Routine+Builder',
+    ],
+    orientation: 'desktop',
+    github: 'https://github.com/SabbirHossainEvan/london_essex',
+    liveDemo: 'https://london-essex-dashboard.vercel.app/',
+  },
+  {
+    title: 'Nasib Dashboard',
+    category: 'Web',
+    description:
+      'A modern, interactive administrative dashboard providing comprehensive data management, real-time analytics, dynamic table views, and user control features designed for effortless operational monitoring.',
+    tags: ['TypeScript', 'Next.js', 'Tailwind CSS', 'Prisma', 'MongoDB', 'Node.js'],
+    images: [
+      'https://placehold.co/520x900/111827/C93CFF?text=Korean+Vision',
+      'https://placehold.co/520x900/171022/F0C7FF?text=Skin+Analysis',
+      'https://placehold.co/520x900/101624/34D399?text=Routine+Builder',
+    ],
+    orientation: 'desktop',
+    github: 'https://github.com/SabbirHossainEvan/london_essex',
+    liveDemo: 'https://nasib-dashboard.vercel.app/',
+  },
+  {
+    title: 'Live Notary',
+    category: 'Web',
+    description:
+      'A modern digital notary platform enabling secure, online document notarization, identity verification, and real-time remote notary sessions with seamless digital signatures',
+    tags: ['TypeScript', 'Next.js', 'Tailwind CSS', 'Prisma', 'MongoDB', 'Node.js'],
+    images: [
+      'https://placehold.co/520x900/111827/C93CFF?text=Korean+Vision',
+      'https://placehold.co/520x900/171022/F0C7FF?text=Skin+Analysis',
+      'https://placehold.co/520x900/101624/34D399?text=Routine+Builder',
+    ],
+    orientation: 'desktop',
+    github: 'https://github.com/SabbirHossainEvan/LiveNotary',
+    liveDemo: 'https://live-notary.vercel.app/',
+  },
 ]
 
 export default function ProjectsPage() {
