@@ -23,25 +23,28 @@ interface Project {
   images: string[]
   orientation: 'mobile' | 'desktop'
   github: string
+  liveDemo: string
 }
 
 const categories: ProjectCategory[] = ['All', 'Mobile', 'Web']
 
 const projects: Project[] = [
-  {
-    title: 'Shelfil App',
-    category: 'Mobile',
+    {
+    title: 'KomTaka.com',
+    category: 'Web',
     description:
-      'A modern book discovery and reading management mobile app built with React Native. Features personalized recommendations, reading progress tracking, and social sharing capabilities.',
-    tags: ['React Native', 'JavaScript', 'Mobile UI'],
+      'A fintech and digital payments platform providing secure money transfers, bill payments, and financial management tools with a focus on mobile-first user experience.',
+    tags: ['JavaScript', 'React', 'Fintech'],
     images: [
-      'https://placehold.co/520x900/111827/C93CFF?text=Shelfil+Home',
-      'https://placehold.co/520x900/171022/F0C7FF?text=Book+Details',
-      'https://placehold.co/520x900/101624/60A5FA?text=Reading+List',
+      'https://placehold.co/900x560/101624/F0C7FF?text=KomTaka.com',
+      'https://placehold.co/900x560/111827/C93CFF?text=Wallet',
+      'https://placehold.co/900x560/15111f/60A5FA?text=Transactions',
     ],
-    orientation: 'mobile',
-    github: 'https://github.com/SabbirHossainEvan/Shelfil_App_React_Native',
+    orientation: 'desktop',
+    github: 'https://github.com/SabbirHossainEvan/KomTaka.com',
+    liveDemo: 'https://kom-taka-com-ten.vercel.app/',
   },
+
   {
     title: 'MediTrust',
     category: 'Web',
@@ -55,26 +58,14 @@ const projects: Project[] = [
     ],
     orientation: 'desktop',
     github: 'https://github.com/SabbirHossainEvan/mediTrust',
+    liveDemo: 'https://medi-trust-theta.vercel.app/',
   },
+
   {
-    title: 'MovieFlex',
+    title: 'UK INKIND',
     category: 'Web',
     description:
-      'A sleek movie discovery and streaming platform with real-time search, trending recommendations, and detailed movie information. Built with TypeScript and modern React patterns.',
-    tags: ['TypeScript', 'React', 'API Integration'],
-    images: [
-      'https://placehold.co/900x560/15111f/C93CFF?text=MovieFlex+Home',
-      'https://placehold.co/900x560/111827/F0C7FF?text=Movie+Details',
-      'https://placehold.co/900x560/101624/D946EF?text=Search+Results',
-    ],
-    orientation: 'desktop',
-    github: 'https://github.com/SabbirHossainEvan/MovieFlex',
-  },
-  {
-    title: 'Car Doctor',
-    category: 'Web',
-    description:
-      'An automotive service booking platform that connects car owners with nearby mechanics. Features real-time tracking, service history, and secure payment integration.',
+      'An accessible, evidence-based digital EMDR therapy platform designed to support mental health recovery. Features guided video instructions, interactive AI-assisted support, and structured progress tracking with full GDPR compliance',
     tags: ['JavaScript', 'React', 'Node.js'],
     images: [
       'https://placehold.co/900x560/111827/D946EF?text=Car+Doctor',
@@ -83,21 +74,9 @@ const projects: Project[] = [
     ],
     orientation: 'desktop',
     github: 'https://github.com/SabbirHossainEvan/car-doctor',
+    liveDemo: 'https://uk-inkind.vercel.app/',
   },
-  {
-    title: 'KomTaka.com',
-    category: 'Web',
-    description:
-      'A fintech and digital payments platform providing secure money transfers, bill payments, and financial management tools with a focus on mobile-first user experience.',
-    tags: ['JavaScript', 'React', 'Fintech'],
-    images: [
-      'https://placehold.co/900x560/101624/F0C7FF?text=KomTaka.com',
-      'https://placehold.co/900x560/111827/C93CFF?text=Wallet',
-      'https://placehold.co/900x560/15111f/60A5FA?text=Transactions',
-    ],
-    orientation: 'desktop',
-    github: 'https://github.com/SabbirHossainEvan/KomTaka.com',
-  },
+
   {
     title: 'Korean Vision',
     category: 'Mobile',
@@ -111,6 +90,37 @@ const projects: Project[] = [
     ],
     orientation: 'mobile',
     github: 'https://github.com/SabbirHossainEvan/korean_vision',
+    liveDemo: 'https://korean-vision.vercel.app/',
+  },
+  {
+    title: 'Proteinbar',
+    category: 'Web',
+    description:
+      'A modern Web application for a healthy food restaurant and meal prep platform[cite: 2]. Features online meal plans, location details, menu showcases, and full dynamic content management via an admin dashboard[cite: 2].',
+    tags: ['TypeScript', 'Next.js', 'Tailwind CSS', 'Prisma', 'MongoDB', 'Node.js'],
+    images: [
+      'https://placehold.co/520x900/111827/C93CFF?text=Korean+Vision',
+      'https://placehold.co/520x900/171022/F0C7FF?text=Skin+Analysis',
+      'https://placehold.co/520x900/101624/34D399?text=Routine+Builder',
+    ],
+    orientation: 'desktop',
+    github: 'https://github.com/SabbirHossainEvan/proteinbar',
+    liveDemo: 'https://proteinbar.vercel.app/',
+  },
+  {
+    title: 'Direct Reinigen Dashboard',
+    category: 'Web',
+    description:
+      'An administrative portal and management dashboard for a cleaning service platform. Features secure authentication, role-based access control, booking management, and real-time operational overview.',
+    tags: ['TypeScript', 'Next.js', 'Tailwind CSS', 'Prisma', 'MongoDB', 'Node.js'],
+    images: [
+      'https://placehold.co/520x900/111827/C93CFF?text=Korean+Vision',
+      'https://placehold.co/520x900/171022/F0C7FF?text=Skin+Analysis',
+      'https://placehold.co/520x900/101624/34D399?text=Routine+Builder',
+    ],
+    orientation: 'desktop',
+    github: 'https://github.com/SabbirHossainEvan/DirectReinigen-Dashboard',
+    liveDemo: 'https://direct-reinigen-dashboard.vercel.app/auth/sign-in',
   },
 ]
 
@@ -264,7 +274,7 @@ export default function ProjectsPage() {
                     Code
                   </a>
                   <a
-                    href={project.github}
+                    href={project.liveDemo}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 rounded-xl border border-[#C93CFF]/25 bg-[#C93CFF]/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#C93CFF]/20"
