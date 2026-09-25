@@ -46,6 +46,21 @@ const projects: Project[] = [
   },
 
   {
+    title: 'LinkooTo',
+    category: 'Mobile',
+    description:
+      'A feature-rich e-commerce platform offering a seamless online shopping experience. Includes product catalog browsing, smart search & filtering, secure payment gateway integration, wishlist, order tracking, and dynamic cart management.',
+    tags: ['React Native', 'Redux', 'REST APIs', 'Firebase', 'Stripe', 'Node.js', 'MongoDB', 'Express.js', 'Node.js'],
+    images: [
+      'https://placehold.co/900x560/101624/F0C7FF?text=LinkooTo',
+      'https://placehold.co/900x560/12201b/34D399?text=Products',
+      'https://placehold.co/900x560/111827/C93CFF?text=Checkout',
+    ],
+    orientation: 'desktop',
+    github: 'https://github.com/SabbirHossainEvan/linkooTo',
+    liveDemo: 'https://github.com/SabbirHossainEvan/linkooTo',
+  },
+  {
     title: 'MediTrust',
     category: 'Web',
     description:
@@ -59,6 +74,22 @@ const projects: Project[] = [
     orientation: 'desktop',
     github: 'https://github.com/SabbirHossainEvan/mediTrust',
     liveDemo: 'https://medi-trust-theta.vercel.app/',
+  },
+
+    {
+    title: 'Direct Reinigen App',
+    category: 'Mobile',
+    description:
+      'A mobile companion app for the Direct Reinigen platform, empowering field staff and customers with real-time booking management, job status updates, location tracking, and instant service notifications.',
+    tags: ['React Native', 'Redux', 'REST APIs', 'Firebase', 'Stripe', 'Node.js', 'MongoDB', 'Express.js', 'Node.js'],
+    images: [
+      'https://placehold.co/900x560/101624/F0C7FF?text=Direct+Reinigen+App',
+      'https://placehold.co/900x560/12201b/34D399?text=Booking+Management',
+      'https://placehold.co/900x560/111827/C93CFF?text=Job+Status',
+    ],
+    orientation: 'desktop',
+    github: 'https://github.com/SabbirHossainEvan/direct-reinigen',
+    liveDemo: 'https://github.com/SabbirHossainEvan/direct-reinigen',
   },
 
   {
@@ -181,6 +212,22 @@ const projects: Project[] = [
     orientation: 'desktop',
     github: 'https://github.com/SabbirHossainEvan/LiveNotary',
     liveDemo: 'https://live-notary.vercel.app/',
+  },
+
+    {
+    title: 'MovieFlix',
+    category: 'Mobile',
+    description:
+      'A feature-rich movie streaming application providing users with a vast library of films and TV shows. Includes personalised recommendations, a powerful search engine, watchlists, high-definition playback, offline viewing, and user reviews.',
+    tags: ['React Native', 'Redux', 'REST APIs', 'Firebase', 'Stripe', 'Node.js', 'MongoDB', 'Express.js', 'Node.js'],
+    images: [
+      'https://placehold.co/900x560/101624/F0C7FF?text=MovieFlix',
+      'https://placehold.co/900x560/12201b/34D399?text=Watchlists',
+      'https://placehold.co/900x560/111827/C93CFF?text=User+Reviews',
+    ],
+    orientation: 'mobile',
+    github: 'https://github.com/SabbirHossainEvan/MovieFlex',
+    liveDemo: 'https://github.com/SabbirHossainEvan/MovieFlex',
   },
 ]
 
