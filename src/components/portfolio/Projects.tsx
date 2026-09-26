@@ -143,7 +143,7 @@ export default function Projects() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-10 md:mb-15"
+          className="text-center mb-10 md:mb-16"
         >
           <span className="text-[#C93CFF] text-sm font-semibold tracking-widest uppercase mb-4 block">Projects</span>
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 md:mb-6">
