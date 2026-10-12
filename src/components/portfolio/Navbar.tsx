@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useCallback, useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { usePathname, useRouter } from 'next/navigation'
@@ -21,11 +21,46 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
 
+  const scrollToElement = useCallback((id: string, behavior: ScrollBehavior = 'smooth') => {
+    const element = document.getElementById(id)
+    if (!element) return false
+
+    const navOffset = window.innerWidth >= 768 ? 80 : 64
+    const targetTop =
+      id === 'home'
+        ? 0
+        : element.getBoundingClientRect().top + window.scrollY - navOffset
+
+    window.scrollTo({
+      top: Math.max(targetTop, 0),
+      behavior,
+    })
+    setActiveSection(id)
+    return true
+  }, [])
+
+  useEffect(() => {
+    if (pathname !== '/') return
+
+    const target = window.sessionStorage.getItem('pending-scroll-section')
+    if (!target) return
+
+    window.sessionStorage.removeItem('pending-scroll-section')
+
+    const frame = window.requestAnimationFrame(() => {
+      scrollToElement(target)
+    })
+
+    return () => window.cancelAnimationFrame(frame)
+  }, [pathname, scrollToElement])
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
 
-      const sections = navLinks.map(link => link.href.substring(1))
+      const sections = navLinks
+        .filter((link) => link.href.startsWith('#'))
+        .map((link) => link.href.substring(1))
       for (const section of sections.reverse()) {
         const element = document.getElementById(section)
         if (element) {
@@ -50,16 +85,14 @@ export default function Navbar() {
     }
 
     if (pathname !== '/') {
-      router.push(`/${href}`)
+      window.sessionStorage.setItem('pending-scroll-section', href.substring(1))
+      router.push('/', { scroll: false })
       setIsMobileMenuOpen(false)
       return
     }
 
     const id = href.substring(1)
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
+    scrollToElement(id)
     setIsMobileMenuOpen(false)
   }
 
@@ -109,7 +142,7 @@ export default function Navbar() {
                   {((link.href === '/projects' && pathname === '/projects') ||
                     (pathname === '/' && link.href.startsWith('#') && activeSection === link.href.substring(1))) && (
                     <motion.span
-                      layoutId="activeNav"
+                      layoutId={`activeNav-${pathname}`}
                       className="absolute inset-0 rounded-full bg-[#C93CFF]/10 border border-[#C93CFF]/20 shadow-[0_0_20px_rgba(201,61,255,0.3)]"
                       transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                     />
