@@ -1,0 +1,408 @@
+'use client'
+
+import { useMemo, useState } from 'react'
+import { motion } from 'framer-motion'
+import {
+  ExternalLink,
+  Github,
+  MonitorSmartphone,
+  Smartphone,
+} from 'lucide-react'
+import Navbar from '@/components/portfolio/Navbar'
+import ProjectLightbox, {
+  type ProjectGalleryItem,
+} from '@/components/portfolio/ProjectLightbox'
+
+type ProjectCategory = 'All' | 'Mobile' | 'Web'
+
+interface Project {
+  title: string
+  category: Exclude<ProjectCategory, 'All'>
+  description: string
+  tags: string[]
+  images: string[]
+  orientation: 'mobile' | 'desktop'
+  github: string
+  liveDemo: string
+}
+
+const categories: ProjectCategory[] = ['All', 'Mobile', 'Web']
+
+const projects: Project[] = [
+    {
+    title: 'KomTaka.com',
+    category: 'Web',
+    description:
+      'A fintech and digital payments platform providing secure money transfers, bill payments, and financial management tools with a focus on mobile-first user experience.',
+    tags: ['JavaScript', 'React', 'Fintech'],
+    images: [
+      'https://placehold.co/900x560/101624/F0C7FF?text=KomTaka.com',
+      'https://placehold.co/900x560/111827/C93CFF?text=Wallet',
+      'https://placehold.co/900x560/15111f/60A5FA?text=Transactions',
+    ],
+    orientation: 'desktop',
+    github: 'https://github.com/SabbirHossainEvan/KomTaka.com',
+    liveDemo: 'https://kom-taka-com-ten.vercel.app/',
+  },
+
+  {
+    title: 'LinkooTo',
+    category: 'Mobile',
+    description:
+      'A feature-rich e-commerce platform offering a seamless online shopping experience. Includes product catalog browsing, smart search & filtering, secure payment gateway integration, wishlist, order tracking, and dynamic cart management.',
+    tags: ['React Native', 'Redux', 'REST APIs', 'Firebase', 'Stripe', 'Node.js', 'MongoDB', 'Express.js'],
+    images: [
+      'https://placehold.co/900x560/101624/F0C7FF?text=LinkooTo',
+      'https://placehold.co/900x560/12201b/34D399?text=Products',
+      'https://placehold.co/900x560/111827/C93CFF?text=Checkout',
+    ],
+    orientation: 'desktop',
+    github: 'https://github.com/SabbirHossainEvan/linkooTo',
+    liveDemo: 'https://github.com/SabbirHossainEvan/linkooTo',
+  },
+  {
+    title: 'MediTrust',
+    category: 'Web',
+    description:
+      'A healthcare and telemedicine web application providing secure patient-doctor communication, appointment scheduling, and medical records management with an intuitive interface.',
+    tags: ['JavaScript', 'React', 'REST APIs'],
+    images: [
+      'https://placehold.co/900x560/101624/F0C7FF?text=MediTrust+Dashboard',
+      'https://placehold.co/900x560/12201b/34D399?text=Appointments',
+      'https://placehold.co/900x560/111827/C93CFF?text=Patient+Records',
+    ],
+    orientation: 'desktop',
+    github: 'https://github.com/SabbirHossainEvan/mediTrust',
+    liveDemo: 'https://medi-trust-theta.vercel.app/',
+  },
+
+    {
+    title: 'Direct Reinigen App',
+    category: 'Mobile',
+    description:
+      'A mobile companion app for the Direct Reinigen platform, empowering field staff and customers with real-time booking management, job status updates, location tracking, and instant service notifications.',
+    tags: ['React Native', 'Redux', 'REST APIs', 'Firebase', 'Stripe', 'Node.js', 'MongoDB', 'Express.js'],
+    images: [
+      'https://placehold.co/900x560/101624/F0C7FF?text=Direct+Reinigen+App',
+      'https://placehold.co/900x560/12201b/34D399?text=Booking+Management',
+      'https://placehold.co/900x560/111827/C93CFF?text=Job+Status',
+    ],
+    orientation: 'desktop',
+    github: 'https://github.com/SabbirHossainEvan/direct-reinigen',
+    liveDemo: 'https://github.com/SabbirHossainEvan/direct-reinigen',
+  },
+
+  {
+    title: 'UK INKIND',
+    category: 'Web',
+    description:
+      'An accessible, evidence-based digital EMDR therapy platform designed to support mental health recovery. Features guided video instructions, interactive AI-assisted support, and structured progress tracking with full GDPR compliance',
+    tags: ['JavaScript', 'React', 'Node.js'],
+    images: [
+      'https://placehold.co/900x560/111827/D946EF?text=Car+Doctor',
+      'https://placehold.co/900x560/101624/F0C7FF?text=Service+Booking',
+      'https://placehold.co/900x560/15111f/C93CFF?text=Mechanic+Profile',
+    ],
+    orientation: 'desktop',
+    github: 'https://github.com/SabbirHossainEvan/car-doctor',
+    liveDemo: 'https://uk-inkind.vercel.app/',
+  },
+
+  {
+    title: 'Korean Vision',
+    category: 'Mobile',
+    description:
+      'An AI-powered Korean beauty and skincare recommendation app. Features personalized product suggestions, skin analysis, and an interactive beauty routine builder.',
+    tags: ['TypeScript', 'React Native', 'AI Integration'],
+    images: [
+      'https://placehold.co/520x900/111827/C93CFF?text=Korean+Vision',
+      'https://placehold.co/520x900/171022/F0C7FF?text=Skin+Analysis',
+      'https://placehold.co/520x900/101624/34D399?text=Routine+Builder',
+    ],
+    orientation: 'mobile',
+    github: 'https://github.com/SabbirHossainEvan/korean_vision',
+    liveDemo: 'https://korean-vision.vercel.app/',
+  },
+  {
+    title: 'Proteinbar',
+    category: 'Web',
+    description:
+      'A modern Web application for a healthy food restaurant and meal prep platform[cite: 2]. Features online meal plans, location details, menu showcases, and full dynamic content management via an admin dashboard[cite: 2].',
+    tags: ['TypeScript', 'Next.js', 'Tailwind CSS', 'Prisma', 'MongoDB', 'Node.js'],
+    images: [
+      'https://placehold.co/520x900/111827/C93CFF?text=Korean+Vision',
+      'https://placehold.co/520x900/171022/F0C7FF?text=Skin+Analysis',
+      'https://placehold.co/520x900/101624/34D399?text=Routine+Builder',
+    ],
+    orientation: 'desktop',
+    github: 'https://github.com/SabbirHossainEvan/proteinbar',
+    liveDemo: 'https://proteinbar.vercel.app/',
+  },
+  {
+    title: 'Direct Reinigen Dashboard',
+    category: 'Web',
+    description:
+      'An administrative portal and management dashboard for a cleaning service platform. Features secure authentication, role-based access control, booking management, and real-time operational overview.',
+    tags: ['TypeScript', 'Next.js', 'Tailwind CSS', 'Prisma', 'MongoDB', 'Node.js'],
+    images: [
+      'https://placehold.co/520x900/111827/C93CFF?text=Korean+Vision',
+      'https://placehold.co/520x900/171022/F0C7FF?text=Skin+Analysis',
+      'https://placehold.co/520x900/101624/34D399?text=Routine+Builder',
+    ],
+    orientation: 'desktop',
+    github: 'https://github.com/SabbirHossainEvan/DirectReinigen-Dashboard',
+    liveDemo: 'https://direct-reinigen-dashboard.vercel.app/auth/sign-in',
+  },
+  {
+    title: 'London Essex',
+    category: 'Web',
+    description:
+      'A modern, responsive business website designed for London & Essex service operations. Features sleek visual layouts, service showcases, contact inquiries, and interactive UI components optimized for desktop and mobile users.',
+    tags: ['TypeScript', 'Next.js', 'Tailwind CSS', 'Prisma', 'MongoDB', 'Node.js'],
+    images: [
+      'https://placehold.co/520x900/111827/C93CFF?text=Korean+Vision',
+      'https://placehold.co/520x900/171022/F0C7FF?text=Skin+Analysis',
+      'https://placehold.co/520x900/101624/34D399?text=Routine+Builder',
+    ],
+    orientation: 'desktop',
+    github: 'https://github.com/SabbirHossainEvan/london_essex',
+    liveDemo: 'https://london-essex.vercel.app/',
+  },
+  {
+    title: 'London Essex Dashboard',
+    category: 'Web',
+    description:
+      'An intuitive administrative management dashboard for London Essex operations. Features real-time analytics, user and service management, data visualization, and role-based access control built for seamless workflow optimization.',
+    tags: ['TypeScript', 'Next.js', 'Tailwind CSS', 'Prisma', 'MongoDB', 'Node.js'],
+    images: [
+      'https://placehold.co/520x900/111827/C93CFF?text=Korean+Vision',
+      'https://placehold.co/520x900/171022/F0C7FF?text=Skin+Analysis',
+      'https://placehold.co/520x900/101624/34D399?text=Routine+Builder',
+    ],
+    orientation: 'desktop',
+    github: 'https://github.com/SabbirHossainEvan/london_essex',
+    liveDemo: 'https://london-essex-dashboard.vercel.app/',
+  },
+  {
+    title: 'Nasib Dashboard',
+    category: 'Web',
+    description:
+      'A modern, interactive administrative dashboard providing comprehensive data management, real-time analytics, dynamic table views, and user control features designed for effortless operational monitoring.',
+    tags: ['TypeScript', 'Next.js', 'Tailwind CSS', 'Prisma', 'MongoDB', 'Node.js'],
+    images: [
+      'https://placehold.co/520x900/111827/C93CFF?text=Korean+Vision',
+      'https://placehold.co/520x900/171022/F0C7FF?text=Skin+Analysis',
+      'https://placehold.co/520x900/101624/34D399?text=Routine+Builder',
+    ],
+    orientation: 'desktop',
+    github: 'https://github.com/SabbirHossainEvan/london_essex',
+    liveDemo: 'https://nasib-dashboard.vercel.app/',
+  },
+  {
+    title: 'Live Notary',
+    category: 'Web',
+    description:
+      'A modern digital notary platform enabling secure, online document notarization, identity verification, and real-time remote notary sessions with seamless digital signatures',
+    tags: ['TypeScript', 'Next.js', 'Tailwind CSS', 'Prisma', 'MongoDB', 'Node.js'],
+    images: [
+      'https://placehold.co/520x900/111827/C93CFF?text=Korean+Vision',
+      'https://placehold.co/520x900/171022/F0C7FF?text=Skin+Analysis',
+      'https://placehold.co/520x900/101624/34D399?text=Routine+Builder',
+    ],
+    orientation: 'desktop',
+    github: 'https://github.com/SabbirHossainEvan/LiveNotary',
+    liveDemo: 'https://live-notary.vercel.app/',
+  },
+
+    {
+    title: 'MovieFlix',
+    category: 'Mobile',
+    description:
+      'A feature-rich movie streaming application providing users with a vast library of films and TV shows. Includes personalised recommendations, a powerful search engine, watchlists, high-definition playback, offline viewing, and user reviews.',
+    tags: ['React Native', 'Redux', 'REST APIs', 'Firebase', 'Stripe', 'Node.js', 'MongoDB', 'Express.js'],
+    images: [
+      'https://placehold.co/900x560/101624/F0C7FF?text=MovieFlix',
+      'https://placehold.co/900x560/12201b/34D399?text=Watchlists',
+      'https://placehold.co/900x560/111827/C93CFF?text=User+Reviews',
+    ],
+    orientation: 'mobile',
+    github: 'https://github.com/SabbirHossainEvan/MovieFlex',
+    liveDemo: 'https://github.com/SabbirHossainEvan/MovieFlex',
+  },
+]
+
+export default function ProjectsPage() {
+  const [activeCategory, setActiveCategory] = useState<ProjectCategory>('All')
+  const [activeProjectIndex, setActiveProjectIndex] = useState<number | null>(null)
+  const [activeImageIndex, setActiveImageIndex] = useState(0)
+
+  const visibleProjects = useMemo(() => {
+    if (activeCategory === 'All') {
+      return projects
+    }
+
+    return projects.filter((project) => project.category === activeCategory)
+  }, [activeCategory])
+
+  const galleryItems: ProjectGalleryItem[] = projects.map((project) => ({
+    title: project.title,
+    category: project.category,
+    images: project.images,
+    orientation: project.orientation,
+  }))
+
+  const openLightbox = (project: Project) => {
+    setActiveProjectIndex(projects.findIndex((item) => item.title === project.title))
+    setActiveImageIndex(0)
+  }
+
+  return (
+    <main className="min-h-screen bg-[#0D0D12] text-white">
+      <Navbar />
+      <section className="relative overflow-hidden border-b border-white/5">
+        <div className="absolute left-1/2 top-0 h-[420px] w-[720px] -translate-x-1/2 rounded-full bg-[#C93CFF]/10 blur-[140px]" />
+        <div className="cyber-grid absolute inset-0 opacity-40" />
+
+        <div className="relative mx-auto max-w-7xl px-4 pb-12 pt-24 sm:px-6 md:pb-16 md:pt-28 lg:px-8">
+
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55 }}
+            className="max-w-3xl"
+          >
+
+            <h1 className="text-5xl font-black tracking-tight text-white sm:text-6xl md:text-7xl">
+              All projects.
+            </h1>
+            <p className="mt-5 max-w-2xl text-base leading-7 text-gray-400 sm:text-lg">
+              A structured collection of selected mobile apps, backend systems,
+              and web experiences. Demo content and placeholder images are used
+              for now.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 md:py-14 lg:px-8">
+        <div className="mb-10 overflow-x-auto border-b border-white/10">
+          <div className="flex min-w-max gap-7">
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setActiveCategory(category)}
+                className={`relative px-1 pb-4 text-sm font-medium transition ${
+                  activeCategory === category
+                    ? 'text-white'
+                    : 'text-gray-500 hover:text-gray-200'
+                }`}
+              >
+                {category}
+                {activeCategory === category && (
+                  <motion.span
+                    layoutId="projectCategory"
+                    className="absolute bottom-0 left-0 h-0.5 w-full rounded-full bg-[#C93CFF]"
+                  />
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <motion.div layout className="grid gap-6 lg:grid-cols-2">
+          {visibleProjects.map((project, index) => (
+            <motion.article
+              layout
+              key={project.title}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: index * 0.04 }}
+              className="group grid overflow-hidden rounded-2xl border border-white/10 bg-white/[0.025] shadow-2xl shadow-black/20 transition hover:border-[#C93CFF]/25 md:grid-cols-[0.86fr_1.14fr]"
+            >
+              <div className="relative min-h-[340px] overflow-hidden bg-[#11111a]">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#C93CFF]/10 via-transparent to-[#F0C7FF]/10" />
+                <div className="absolute inset-0 flex items-center justify-center p-8">
+                  <button
+                    type="button"
+                    onClick={() => openLightbox(project)}
+                    className="cursor-zoom-in"
+                    aria-label={`Open ${project.title} gallery`}
+                  >
+                    <img
+                      src={project.images[0]}
+                      alt={`${project.title} placeholder preview`}
+                      className={`rounded-2xl border border-white/10 object-cover shadow-2xl shadow-black/40 transition duration-500 group-hover:scale-[1.03] ${
+                        project.orientation === 'mobile'
+                          ? 'h-[420px] w-[240px]'
+                          : 'h-auto w-full'
+                      }`}
+                    />
+                  </button>
+                </div>
+              </div>
+
+              <div className="flex min-h-[340px] flex-col p-6 sm:p-7">
+                <div className="mb-5 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#C93CFF]">
+                  {project.orientation === 'mobile' ? (
+                    <Smartphone size={15} />
+                  ) : (
+                    <MonitorSmartphone size={15} />
+                  )}
+                  {project.category}
+                </div>
+
+                <h2 className="text-2xl font-bold tracking-tight text-white">
+                  {project.title}
+                </h2>
+                <p className="mt-5 text-sm leading-7 text-gray-400">
+                  {project.description}
+                </p>
+
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-gray-300"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="mt-auto flex flex-wrap gap-3 pt-7">
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-gray-200 transition hover:border-[#C93CFF]/30 hover:text-white"
+                  >
+                    <Github size={17} />
+                    Code
+                  </a>
+                  <a
+                    href={project.liveDemo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-xl border border-[#C93CFF]/25 bg-[#C93CFF]/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#C93CFF]/20"
+                  >
+                    <ExternalLink size={17} />
+                    Preview
+                  </a>
+                </div>
+              </div>
+            </motion.article>
+          ))}
+        </motion.div>
+      </section>
+
+      <ProjectLightbox
+        items={galleryItems}
+        activeIndex={activeProjectIndex}
+        activeImageIndex={activeImageIndex}
+        onClose={() => setActiveProjectIndex(null)}
+        onImageChange={setActiveImageIndex}
+      />
+    </main>
+  )
+}

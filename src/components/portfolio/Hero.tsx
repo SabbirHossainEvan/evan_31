@@ -214,8 +214,7 @@ export default function Hero() {
               className="mt-2 md:mt-3 text-sm md:text-base text-gray-500 max-w-xl lg:max-w-lg mx-auto lg:mx-0"
               variants={itemVariants}
             >
-              Building fast, scalable, user-friendly web & mobile apps with clean code.
-              Creating modern interfaces that deliver exceptional experiences.
+              Building fast, scalable, user-friendly web & mobile apps with clean code. Creating modern interfaces. Exploring Data Science & AI.
             </motion.p>
           </motion.div>
 

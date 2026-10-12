@@ -1,236 +1,316 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
-import { useRef, useState } from 'react'
-import { ExternalLink, Github, Smartphone, Globe } from 'lucide-react'
+import { useMemo, useRef, useState } from 'react'
+import {
+  ArrowRight,
+  ExternalLink,
+  Github,
+  MonitorSmartphone,
+  Smartphone,
+} from 'lucide-react'
+import ProjectLightbox, {
+  type ProjectGalleryItem,
+} from '@/components/portfolio/ProjectLightbox'
+
+type ProjectCategory = 'All' | 'Mobile' | 'Web'
 
 interface Project {
   title: string
+  category: Exclude<ProjectCategory, 'All'>
   description: string
   tags: string[]
-  category: 'mobile' | 'web'
-  github?: string
-  gradient: string
-  icon: typeof Smartphone
+  images: string[]
+  orientation: 'mobile' | 'desktop'
+  github: string
+  liveDemo: string
 }
+
+const categories: ProjectCategory[] = ['All', 'Mobile', 'Web']
 
 const projects: Project[] = [
   {
-    title: 'Shelfil App',
-    description: 'A modern book discovery and reading management mobile app built with React Native. Features personalized recommendations, reading progress tracking, and social sharing capabilities.',
-    tags: ['React Native', 'JavaScript', 'Mobile UI'],
-    category: 'mobile',
-    github: 'https://github.com/SabbirHossainEvan/Shelfil_App_React_Native',
-    gradient: 'from-[#5E1B8C]/20 to-[#C93CFF]/20',
-    icon: Smartphone,
+    title: 'KomTaka.com',
+    category: 'Web',
+    description:
+      'A fintech and digital payments platform providing secure money transfers, bill payments, and financial management tools with a focus on mobile-first user experience.',
+    tags: ['JavaScript', 'React', 'Fintech'],
+    images: [
+      'https://placehold.co/900x560/101624/F0C7FF?text=KomTaka.com',
+      'https://placehold.co/900x560/111827/C93CFF?text=Wallet',
+      'https://placehold.co/900x560/15111f/60A5FA?text=Transactions',
+    ],
+    orientation: 'desktop',
+    github: 'https://github.com/SabbirHossainEvan/KomTaka.com',
+    liveDemo: 'https://kom-taka-com-ten.vercel.app/',
+  },
+  {
+    title: 'LinkooTo',
+    category: 'Mobile',
+    description:
+      'A feature-rich e-commerce platform offering a seamless online shopping experience. Includes product catalog browsing, smart search and filtering, secure payment gateway integration, wishlist, order tracking, and dynamic cart management.',
+    tags: ['React Native', 'Redux', 'REST APIs', 'Firebase', 'Stripe'],
+    images: [
+      'https://placehold.co/900x560/101624/F0C7FF?text=LinkooTo',
+      'https://placehold.co/900x560/12201b/34D399?text=Products',
+      'https://placehold.co/900x560/111827/C93CFF?text=Checkout',
+    ],
+    orientation: 'desktop',
+    github: 'https://github.com/SabbirHossainEvan/linkooTo',
+    liveDemo: 'https://github.com/SabbirHossainEvan/linkooTo',
   },
   {
     title: 'MediTrust',
-    description: 'A healthcare and telemedicine web application providing secure patient-doctor communication, appointment scheduling, and medical records management with an intuitive interface.',
+    category: 'Web',
+    description:
+      'A healthcare and telemedicine web application providing secure patient-doctor communication, appointment scheduling, and medical records management with an intuitive interface.',
     tags: ['JavaScript', 'React', 'REST APIs'],
-    category: 'web',
+    images: [
+      'https://placehold.co/900x560/101624/F0C7FF?text=MediTrust+Dashboard',
+      'https://placehold.co/900x560/12201b/34D399?text=Appointments',
+      'https://placehold.co/900x560/111827/C93CFF?text=Patient+Records',
+    ],
+    orientation: 'desktop',
     github: 'https://github.com/SabbirHossainEvan/mediTrust',
-    gradient: 'from-[#9333EA]/20 to-[#F0C7FF]/20',
-    icon: Globe,
+    liveDemo: 'https://medi-trust-theta.vercel.app/',
   },
   {
-    title: 'MovieFlex',
-    description: 'A sleek movie discovery and streaming platform with real-time search, trending recommendations, and detailed movie information. Built with TypeScript and modern React patterns.',
-    tags: ['TypeScript', 'React', 'API Integration'],
-    category: 'web',
-    github: 'https://github.com/SabbirHossainEvan/MovieFlex',
-    gradient: 'from-[#F0C7FF]/20 to-[#D946EF]/20',
-    icon: Globe,
+    title: 'Direct Reinigen App',
+    category: 'Mobile',
+    description:
+      'A mobile companion app for the Direct Reinigen platform, empowering field staff and customers with real-time booking management, job status updates, location tracking, and instant service notifications.',
+    tags: ['React Native', 'Redux', 'REST APIs', 'Firebase', 'Stripe'],
+    images: [
+      'https://placehold.co/900x560/101624/F0C7FF?text=Direct+Reinigen+App',
+      'https://placehold.co/900x560/12201b/34D399?text=Booking+Management',
+      'https://placehold.co/900x560/111827/C93CFF?text=Job+Status',
+    ],
+    orientation: 'desktop',
+    github: 'https://github.com/SabbirHossainEvan/direct-reinigen',
+    liveDemo: 'https://github.com/SabbirHossainEvan/direct-reinigen',
   },
   {
-    title: 'Car Doctor',
-    description: 'An automotive service booking platform that connects car owners with nearby mechanics. Features real-time tracking, service history, and secure payment integration.',
+    title: 'UK INKIND',
+    category: 'Web',
+    description:
+      'An accessible, evidence-based digital EMDR therapy platform designed to support mental health recovery. Features guided video instructions, interactive AI-assisted support, and structured progress tracking with full GDPR compliance.',
     tags: ['JavaScript', 'React', 'Node.js'],
-    category: 'web',
+    images: [
+      'https://placehold.co/900x560/111827/D946EF?text=UK+INKIND',
+      'https://placehold.co/900x560/101624/F0C7FF?text=Therapy+Session',
+      'https://placehold.co/900x560/15111f/C93CFF?text=Progress+Tracking',
+    ],
+    orientation: 'desktop',
     github: 'https://github.com/SabbirHossainEvan/car-doctor',
-    gradient: 'from-[#D946EF]/20 to-[#C93CFF]/20',
-    icon: Globe,
-  },
-  {
-    title: 'KomTaka.com',
-    description: 'A fintech and digital payments platform providing secure money transfers, bill payments, and financial management tools with a focus on mobile-first user experience.',
-    tags: ['JavaScript', 'React', 'Fintech'],
-    category: 'web',
-    github: 'https://github.com/SabbirHossainEvan/KomTaka.com',
-    gradient: 'from-[#5E1B8C]/20 to-[#F0C7FF]/20',
-    icon: Smartphone,
+    liveDemo: 'https://uk-inkind.vercel.app/',
   },
   {
     title: 'Korean Vision',
-    description: 'An AI-powered Korean beauty and skincare recommendation app. Features personalized product suggestions, skin analysis, and an interactive beauty routine builder.',
+    category: 'Mobile',
+    description:
+      'An AI-powered Korean beauty and skincare recommendation app. Features personalized product suggestions, skin analysis, and an interactive beauty routine builder.',
     tags: ['TypeScript', 'React Native', 'AI Integration'],
-    category: 'mobile',
+    images: [
+      'https://placehold.co/520x900/111827/C93CFF?text=Korean+Vision',
+      'https://placehold.co/520x900/171022/F0C7FF?text=Skin+Analysis',
+      'https://placehold.co/520x900/101624/34D399?text=Routine+Builder',
+    ],
+    orientation: 'mobile',
     github: 'https://github.com/SabbirHossainEvan/korean_vision',
-    gradient: 'from-[#9333EA]/20 to-[#C93CFF]/20',
-    icon: Smartphone,
+    liveDemo: 'https://korean-vision.vercel.app/',
   },
 ]
 
 export default function Projects() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
-  const [filter, setFilter] = useState<'all' | 'mobile' | 'web'>('all')
+  const [activeCategory, setActiveCategory] = useState<ProjectCategory>('All')
+  const [activeProjectIndex, setActiveProjectIndex] = useState<number | null>(null)
+  const [activeImageIndex, setActiveImageIndex] = useState(0)
 
-  const filtered = filter === 'all' ? projects : projects.filter(p => p.category === filter)
+  const visibleProjects = useMemo(() => {
+    if (activeCategory === 'All') {
+      return projects
+    }
+
+    return projects.filter((project) => project.category === activeCategory)
+  }, [activeCategory])
+
+  const galleryItems: ProjectGalleryItem[] = projects.map((project) => ({
+    title: project.title,
+    category: project.category,
+    images: project.images,
+    orientation: project.orientation,
+  }))
+
+  const openLightbox = (project: Project) => {
+    setActiveProjectIndex(projects.findIndex((item) => item.title === project.title))
+    setActiveImageIndex(0)
+  }
 
   return (
-    <section id="projects" className="relative py-20 md:py-32 bg-[#0D0D12] overflow-hidden">
-      {/* Background */}
-      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-[#5E1B8C]/5 blur-[150px] rounded-full" />
+    <section
+      id="projects"
+      className="relative overflow-hidden border-y border-white/5 bg-[#0D0D12] py-20 md:py-28"
+    >
+      <div className="absolute left-1/2 top-0 h-[420px] w-[720px] -translate-x-1/2 rounded-full bg-[#C93CFF]/10 blur-[140px]" />
+      <div className="cyber-grid absolute inset-0 opacity-30" />
 
-      <div ref={ref} className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
+      <div ref={ref} className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-10 md:mb-16"
+          className="mb-10 max-w-3xl md:mb-12"
         >
-          <span className="text-[#C93CFF] text-sm font-semibold tracking-widest uppercase mb-4 block">Projects</span>
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 md:mb-6">
-            Featured
-            <span className="bg-gradient-to-r from-[#C93CFF] to-[#F0C7FF] bg-clip-text text-transparent"> Works</span>
+          <span className="mb-4 block text-sm font-semibold uppercase tracking-widest text-[#C93CFF]">
+            Projects
+          </span>
+          <h2 className="text-4xl font-black tracking-tight text-white sm:text-5xl md:text-6xl">
+            Featured works.
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto text-sm md:text-base">
-            A selection of my recent projects showcasing mobile app development and modern web applications.
+          <p className="mt-5 max-w-2xl text-sm leading-7 text-gray-400 sm:text-base">
+            Selected mobile apps, web platforms, and product dashboards with
+            direct links to source code and live previews.
           </p>
         </motion.div>
 
-        {/* Filter tabs */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex justify-center gap-2 mb-8 md:mb-12"
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="mb-10 overflow-x-auto border-b border-white/10"
         >
-          {(['all', 'mobile', 'web'] as const).map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setFilter(tab)}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                filter === tab
-                  ? 'bg-[#C93CFF]/15 text-[#C93CFF] border border-[#C93CFF]/30'
-                  : 'bg-white/5 text-gray-400 border border-white/10 hover:text-white hover:bg-white/10'
-              }`}
-            >
-              {tab === 'all' ? 'All Projects' : tab === 'mobile' ? '📱 Mobile' : '🌐 Web'}
-            </button>
-          ))}
+          <div className="flex min-w-max gap-7">
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setActiveCategory(category)}
+                className={`relative px-1 pb-4 text-sm font-medium transition ${
+                  activeCategory === category
+                    ? 'text-white'
+                    : 'text-gray-500 hover:text-gray-200'
+                }`}
+              >
+                {category}
+                {activeCategory === category && (
+                  <motion.span
+                    layoutId="landingProjectCategory"
+                    className="absolute bottom-0 left-0 h-0.5 w-full rounded-full bg-[#C93CFF]"
+                  />
+                )}
+              </button>
+            ))}
+          </div>
         </motion.div>
 
-        {/* Projects grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-          {filtered.map((project, i) => (
-            <motion.div
-              key={project.title}
+        <motion.div layout className="grid gap-6 lg:grid-cols-2">
+          {visibleProjects.map((project, index) => (
+            <motion.article
               layout
-              initial={{ opacity: 0, y: 30 }}
+              key={project.title}
+              initial={{ opacity: 0, y: 24 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.5, delay: 0.1 + i * 0.1 }}
-              whileHover={{ y: -8 }}
-              className="group relative rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#C93CFF]/20 overflow-hidden transition-all duration-300"
+              transition={{ duration: 0.45, delay: 0.1 + index * 0.06 }}
+              className="group grid overflow-hidden rounded-2xl border border-white/10 bg-white/[0.025] shadow-2xl shadow-black/20 transition hover:border-[#C93CFF]/25 md:grid-cols-[0.86fr_1.14fr]"
             >
-              {/* Project gradient header */}
-              <div className={`h-32 md:h-40 bg-gradient-to-br ${project.gradient} relative overflow-hidden`}>
-                <div className="absolute inset-0 bg-black/20" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <motion.div
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="p-4 md:p-5 rounded-2xl bg-black/30 backdrop-blur-sm border border-white/10"
+              <div className="relative min-h-[300px] overflow-hidden bg-[#11111a] md:min-h-[340px]">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#C93CFF]/10 via-transparent to-[#F0C7FF]/10" />
+                <div className="absolute inset-0 flex items-center justify-center p-6 sm:p-8">
+                  <button
+                    type="button"
+                    onClick={() => openLightbox(project)}
+                    className="cursor-zoom-in"
+                    aria-label={`Open ${project.title} gallery`}
                   >
-                    <project.icon size={32} className="text-white/80" />
-                  </motion.div>
-                </div>
-                {/* Category badge */}
-                <div className="absolute top-3 right-3">
-                  <span className={`px-2.5 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wider ${
-                    project.category === 'mobile'
-                      ? 'bg-[#C93CFF]/20 text-[#C93CFF] border border-[#C93CFF]/30'
-                      : 'bg-[#F0C7FF]/20 text-[#F0C7FF] border border-[#F0C7FF]/30'
-                  }`}>
-                    {project.category}
-                  </span>
+                    <img
+                      src={project.images[0]}
+                      alt={`${project.title} placeholder preview`}
+                      className={`rounded-2xl border border-white/10 object-cover shadow-2xl shadow-black/40 transition duration-500 group-hover:scale-[1.03] ${
+                        project.orientation === 'mobile'
+                          ? 'h-[390px] w-[220px]'
+                          : 'h-auto w-full'
+                      }`}
+                    />
+                  </button>
                 </div>
               </div>
 
-              {/* Content */}
-              <div className="p-4 md:p-5">
-                <h3 className="text-lg md:text-xl font-bold text-white mb-2 group-hover:text-[#C93CFF] transition-colors">
+              <div className="flex min-h-[300px] flex-col p-6 sm:p-7 md:min-h-[340px]">
+                <div className="mb-5 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#C93CFF]">
+                  {project.orientation === 'mobile' ? (
+                    <Smartphone size={15} />
+                  ) : (
+                    <MonitorSmartphone size={15} />
+                  )}
+                  {project.category}
+                </div>
+
+                <h3 className="text-2xl font-bold tracking-tight text-white">
                   {project.title}
                 </h3>
-                <p className="text-gray-500 text-xs md:text-sm leading-relaxed mb-4 line-clamp-3">
+                <p className="mt-5 text-sm leading-7 text-gray-400">
                   {project.description}
                 </p>
 
-                {/* Tags */}
-                <div className="flex flex-wrap gap-1.5 mb-4">
+                <div className="mt-6 flex flex-wrap gap-2">
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-2 py-0.5 rounded-md bg-white/5 text-gray-400 text-[10px] md:text-xs font-medium"
+                      className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-gray-300"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
 
-                {/* Links */}
-                <div className="flex items-center gap-3 pt-3 border-t border-white/5">
-                  {project.github && (
-                    <motion.a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      className="flex items-center gap-1.5 text-xs text-gray-400 hover:text-[#C93CFF] transition-colors"
-                    >
-                      <Github size={14} />
-                      <span>Code</span>
-                    </motion.a>
-                  )}
-                  <motion.a
+                <div className="mt-auto flex flex-wrap gap-3 pt-7">
+                  <a
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    className="flex items-center gap-1.5 text-xs text-gray-400 hover:text-[#C93CFF] transition-colors ml-auto"
+                    className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-gray-200 transition hover:border-[#C93CFF]/30 hover:text-white"
                   >
-                    <ExternalLink size={14} />
-                    <span>View</span>
-                  </motion.a>
+                    <Github size={17} />
+                    Code
+                  </a>
+                  <a
+                    href={project.liveDemo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-xl border border-[#C93CFF]/25 bg-[#C93CFF]/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#C93CFF]/20"
+                  >
+                    <ExternalLink size={17} />
+                    Preview
+                  </a>
                 </div>
               </div>
-            </motion.div>
+            </motion.article>
           ))}
-        </div>
-
-        {/* View more */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.5, delay: 0.8 }}
-          className="text-center mt-10 md:mt-14"
-        >
-          <motion.a
-            href="https://github.com/SabbirHossainEvan"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/5 border border-white/10 text-gray-300 text-sm font-medium hover:bg-white/10 hover:border-white/20 transition-all"
-          >
-            <Github size={18} />
-            View All Repositories
-          </motion.a>
         </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.45 }}
+          className="mt-10 flex justify-center md:mt-14"
+        >
+          <a
+            href="/projects"
+            className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-gray-200 transition hover:border-[#C93CFF]/30 hover:bg-white/10 hover:text-white"
+          >
+            View all projects
+            <ArrowRight size={17} />
+          </a>
+        </motion.div>
+
+        <ProjectLightbox
+          items={galleryItems}
+          activeIndex={activeProjectIndex}
+          activeImageIndex={activeImageIndex}
+          onClose={() => setActiveProjectIndex(null)}
+          onImageChange={setActiveImageIndex}
+        />
       </div>
     </section>
   )
